@@ -42,4 +42,3 @@ jobs:
         run: |
           prettier '**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}' --write
           git diff --color --exit-code
-

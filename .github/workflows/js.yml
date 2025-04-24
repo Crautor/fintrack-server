@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy Test 
+    name: Code Quality 
 
     steps:
       - name: Checkout
@@ -38,6 +38,9 @@ jobs:
         run: |
           echo 'node_modules\nbuild\ndist\n' > .prettierignore
 
-      - name: Run Prettier and fail if formatting is wrong
+      - name: Run Prettier and show formatting diffs
         run: |
-          prettier "**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}" --check --loglevel warn
+          prettier "**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}" --write
+          git diff --color
+          git diff --exit-code
+

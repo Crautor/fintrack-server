@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Test 
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22' 
+
+      - name: Install Prettier
+        run: npm install -g prettier
+
+      - name: Create .prettierrc
+        run: |
+          echo '{
+            "singleQuote": true,
+            "trailingComma": "all",
+            "semi": true,
+            "printWidth": 120,
+            "tabWidth": 2,
+            "endOfLine": "auto"
+          }' > .prettierrc
+
+      - name: Run Prettier and fail if formatting is wrong
+        run: |
+          prettier "**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}" --check

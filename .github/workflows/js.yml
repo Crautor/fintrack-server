@@ -41,4 +41,5 @@ jobs:
       - name: Run Prettier and show formatting diffs
         run: |
           prettier '**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}' --write
-          git diff --color
+          git diff --color --exit-code
+

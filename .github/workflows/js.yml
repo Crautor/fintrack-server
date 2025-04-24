@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -34,6 +34,10 @@ jobs:
             "endOfLine": "auto"
           }' > .prettierrc
 
+      - name: Create .prettierignore
+        run: |
+          echo 'node_modules\nbuild\ndist\n' > .prettierignore
+
       - name: Run Prettier and fail if formatting is wrong
         run: |
-          prettier "**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}" --check
+          prettier "**/*.{css,scss,yaml,yml,ts,js,jsx,tsx,json,md}" --check --loglevel warn

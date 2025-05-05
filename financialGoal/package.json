@@ -19,6 +19,7 @@
     "express": "^5.1.0",
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.2",
+    "swagger-autogen": "^2.23.7",
     "yup": "^1.6.1"
   }
 }

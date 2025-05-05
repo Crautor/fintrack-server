@@ -7,6 +7,6 @@ COPY . .
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 3001
 
-CMD ["sh", "-c", "if [ \"$DEBUG\" = \"TRUE\" ]; then npm run swagger; else npm run start:watch; fi"]
+CMD ["sh", "-c", "npx prisma migrate deploy && if [ \"$DEBUG\" = \"TRUE\" ]; then npm run swagger; else npm run start:watch; fi"]

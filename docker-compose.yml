@@ -1,9 +1,48 @@
 services:
-  server:
-    build: ./auth
-    volumes:
-      - ./auth:/app
+
+  # server:
+  #   build: ./auth
+  #   volumes:
+  #     - ./auth:/app
+  #   ports:
+  #     - '2555:3000'
+  #   env_file:
+  #     - ./envs/auth.env
+
+  mysql-financialgoal:
+    image: mysql:8.0
+    container_name: mysql-financialgoal
+    environment:
+      DATABASE_URL: mysql://root:root@mysql-financialgoal:3306/financialgoal
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fintrack
     ports:
-      - '2555:3000'
+      - "3307:3306"
+    networks:
+      - financialgoal-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  financialgoal:
+    build: ./financialGoal
+    container_name: financialgoal-container
+    volumes:
+      - ./financialGoal:/app
+    ports:
+      - '3001:3001'
     env_file:
-      - ./envs/auth.env
+      - ./envs/financialGoal.env
+    depends_on:
+      - mysql-financialgoal
+    networks:
+      - financialgoal-network
+
+networks:
+  financialgoal-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

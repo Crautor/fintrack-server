@@ -6,10 +6,10 @@ export default (schema) => (req, res, next) => {
     });
 
     next();
-  } catch(err) {
+  } catch (err) {
     res.payment_required({
       message: err.message,
       errors: err.errors,
     });
   }
-}
+};

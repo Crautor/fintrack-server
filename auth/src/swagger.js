@@ -8,8 +8,8 @@ const doc = {
   },
   servers: [
     {
-      url: "http://localhost:4040/"
-    }
+      url: "http://localhost:4040/",
+    },
   ],
   components: {
     schemas: {
@@ -26,16 +26,17 @@ const doc = {
     securitySchemes: {
       bearerAuth: {
         type: "http",
-        scheme: "bearer"
-      }
-    }
+        scheme: "bearer",
+      },
+    },
   },
 };
 
 const outputFile = "./config/swagger.json";
 const endpointsFiles = ["./routes.js"];
 
-swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFiles, doc)
-  .then(async () => {
+swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFiles, doc).then(
+  async () => {
     await import("./server.js");
-  });
+  }
+);

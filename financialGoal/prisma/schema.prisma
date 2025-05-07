@@ -1,0 +1,17 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows", "debian-openssl-3.0.x"]
+}
+
+model FinancialGoal {
+  financialGoalId Int      @id @default(autoincrement())
+  userId          Int
+  value           Float
+  limitDate       DateTime
+  status          String
+}

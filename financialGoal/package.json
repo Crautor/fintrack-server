@@ -1,0 +1,25 @@
+{
+  "name": "financialgoal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server",
+    "start:watch": "node --watch src/server",
+    "swagger": "node src/swagger",
+    "swagger:watch": "node --watch src/swagger"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "http-status": "^2.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "swagger-autogen": "^2.23.7",
+    "yup": "^1.6.1"
+  }
+}

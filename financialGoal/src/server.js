@@ -1,7 +1,7 @@
-import express from "express";
-import dotenv from "dotenv";
-import FinancialGoalRouter from "./interfaces/routes/financialGoalRouter.js";
-import responseHandler from "./interfaces/handlers/responseHandler.js";
+import express from 'express';
+import dotenv from 'dotenv';
+import FinancialGoalRouter from './interfaces/routes/financialGoalRouter.js';
+import responseHandler from './interfaces/handlers/responseHandler.js';
 
 dotenv.config();
 
@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.use(responseHandler);
 
-app.use("/api/financialGoals", FinancialGoalRouter);
+app.use('/api/financialGoals', FinancialGoalRouter);
 
-app.listen(3001, () => console.log("Financial Goal Service running on port 3001"));
+app.listen(3001, () => console.log('Financial Goal Service running on port 3001'));

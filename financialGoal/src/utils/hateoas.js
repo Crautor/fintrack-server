@@ -17,5 +17,5 @@ export function hateoas_item(resource, baseUrl) {
 }
 
 export function hateoas_list(resources, baseUrl) {
-  return resources.map(r => hateoas_item(r, baseUrl));
+  return resources.map((r) => hateoas_item(r, baseUrl));
 }

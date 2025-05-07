@@ -1,7 +1,7 @@
-import FinancialGoalService from "../../application/FinancialGoalService.js";
-import { hateoas_item, hateoas_list } from "../../utils/hateoas.js";
+import FinancialGoalService from '../../application/FinancialGoalService.js';
+import { hateoas_item, hateoas_list } from '../../utils/hateoas.js';
 
-const baseUrl = "/api/financial-goals";
+const baseUrl = '/api/financial-goals';
 
 export const listFinancialGoals = async (req, res, next) => {
   const goals = await FinancialGoalService.getAll();
@@ -10,7 +10,7 @@ export const listFinancialGoals = async (req, res, next) => {
 
 export const getFinancialGoal = async (req, res, next) => {
   const goal = await FinancialGoalService.getById(req.params.id);
-  if (!goal) return res.not_found.json({ error: "Not found" });
+  if (!goal) return res.not_found.json({ error: 'Not found' });
   res.json(hateoas_item(goal, baseUrl));
 };
 

@@ -1,5 +1,5 @@
-import httpStatus from "http-status";
-import { hateoas_item, hateoas_list } from "../../utils/hateoas.js";
+import httpStatus from 'http-status';
+import { hateoas_item, hateoas_list } from '../../utils/hateoas.js';
 
 export default (req, res, next) => {
   res.ok = (data) => {
@@ -20,7 +20,7 @@ export default (req, res, next) => {
 
   res.forbidden = (err) => {
     res.status(httpStatus.FORBIDDEN).send(err);
-  }
+  };
 
   res.not_found = () => {
     res.status(httpStatus.NOT_FOUND).send();
@@ -35,13 +35,13 @@ export default (req, res, next) => {
   };
 
   res.hateoas_item = (resource) => {
-    const baseUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+    const baseUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
     const item = hateoas_item(resource, baseUrl);
     res.status(httpStatus.OK).json(item);
-  }
+  };
 
   res.hateoas_list = (resources, page) => {
-    const baseUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+    const baseUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
     const list = hateoas_list(resources, baseUrl);
     res.status(httpStatus.OK).json({
       page,

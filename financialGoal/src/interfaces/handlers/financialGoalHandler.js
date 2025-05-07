@@ -1,4 +1,4 @@
-import financialGoalService from "../../application/FinancialGoalService.js";
+import financialGoalService from '../../application/FinancialGoalService.js';
 
 export const create = async (req, res, next) => {
   try {

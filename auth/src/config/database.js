@@ -7,7 +7,7 @@ const config = async (url) => {
   } catch (err) {
     console.error(`An error ocurred ${err}`);
   }
-}
+};
 
 export default {
   config,

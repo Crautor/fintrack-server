@@ -2,22 +2,16 @@ import httpStatus from "http-status";
 
 export default (req, res, next) => {
   res.ok = (data) => {
-    res
-      .status(httpStatus.OK)
-      .json(data);
-  }
+    res.status(httpStatus.OK).json(data);
+  };
 
   res.created = () => {
-    res
-      .status(httpStatus.CREATED)
-      .send();
-  }
+    res.status(httpStatus.CREATED).send();
+  };
 
   res.no_content = () => {
-    res
-      .status(httpStatus.NO_CONTENT)
-      .send();
-  }
+    res.status(httpStatus.NO_CONTENT).send();
+  };
 
   res.internal_server_error = (err) => {
     /*
@@ -25,28 +19,20 @@ export default (req, res, next) => {
       schema: { $ref: "#/definitions/InternalServerError"}
     }
     */
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json(err);
-  }
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json(err);
+  };
 
   res.not_found = () => {
-    res
-      .status(httpStatus.NOT_FOUND)
-      .send("not found...");
-  }
+    res.status(httpStatus.NOT_FOUND).send("not found...");
+  };
 
   res.payment_required = (err) => {
-    res
-      .status(httpStatus.PAYMENT_REQUIRED)
-      .json(err);
-  }
+    res.status(httpStatus.PAYMENT_REQUIRED).json(err);
+  };
 
   res.unauthorized = () => {
-    res
-    .status(httpStatus.UNAUTHORIZED)
-    .send();
-  }
+    res.status(httpStatus.UNAUTHORIZED).send();
+  };
 
   next();
-}
+};

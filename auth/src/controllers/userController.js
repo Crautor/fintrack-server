@@ -1,4 +1,4 @@
-import User from "../models/userModel.js";
+import User from '../models/userModel.js';
 
 export const login = async (req, res, next) => {
   /*
@@ -12,7 +12,7 @@ export const login = async (req, res, next) => {
   });
 
   next();
-}
+};
 
 export const showUser = async (req, res, next) => {
   /*
@@ -26,7 +26,7 @@ export const showUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};
 
 export const listUsers = async (req, res, next) => {
   /*
@@ -40,11 +40,7 @@ export const listUsers = async (req, res, next) => {
 
     const offset = (page - 1) * size;
 
-    const users = await User
-      .find(filter)
-      .skip(offset)
-      .limit(size)
-      .sort(_order);
+    const users = await User.find(filter).skip(offset).limit(size).sort(_order);
 
     const totalData = await User.countDocuments();
     const totalPages = Math.ceil(totalData / size);
@@ -53,7 +49,7 @@ export const listUsers = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};
 
 export const createUser = async (req, res, next) => {
   /*
@@ -77,7 +73,7 @@ export const createUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};
 
 export const editUser = async (req, res, next) => {
   /*
@@ -91,19 +87,23 @@ export const editUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
-    const user = await User.findOneAndUpdate(req.params, {
-      name,
-      email,
-      password,
-    }, {
-      new: true,
-    });
+    const user = await User.findOneAndUpdate(
+      req.params,
+      {
+        name,
+        email,
+        password,
+      },
+      {
+        new: true,
+      },
+    );
 
     res.hateoas_item(user);
   } catch (err) {
     next(err);
   }
-}
+};
 
 export const deleteUser = async (req, res, next) => {
   /*
@@ -117,4 +117,4 @@ export const deleteUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};

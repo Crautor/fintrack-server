@@ -1,4 +1,4 @@
-import httpStatus from "http-status";
+import httpStatus from 'http-status';
 
 export default (req, res, next) => {
   res.ok = (data) => {
@@ -23,7 +23,7 @@ export default (req, res, next) => {
   };
 
   res.not_found = () => {
-    res.status(httpStatus.NOT_FOUND).send("not found...");
+    res.status(httpStatus.NOT_FOUND).send('not found...');
   };
 
   res.payment_required = (err) => {

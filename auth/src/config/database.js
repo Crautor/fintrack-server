@@ -1,4 +1,4 @@
-import { connect } from "mongoose";
+import { connect } from 'mongoose';
 
 const config = async (url) => {
   try {
@@ -7,7 +7,7 @@ const config = async (url) => {
   } catch (err) {
     console.error(`An error ocurred ${err}`);
   }
-}
+};
 
 export default {
   config,

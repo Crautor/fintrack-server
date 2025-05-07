@@ -1,4 +1,4 @@
-import jsonwebtoken from "jsonwebtoken";
+import jsonwebtoken from 'jsonwebtoken';
 
 export const generate = (req, res, next) => {
   if (!req.user) {
@@ -17,7 +17,7 @@ export const generate = (req, res, next) => {
   });
 
   res.ok({ token });
-}
+};
 
 export const verify = (req, res, next) => {
   /*
@@ -29,7 +29,7 @@ export const verify = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!!authHeader) {
-    const token = authHeader.split(" ")[1];
+    const token = authHeader.split(' ')[1];
 
     const JWTSECRET = process.env.JWTSECRET;
     return jsonwebtoken.verify(token, JWTSECRET, (err, payload) => {
@@ -41,4 +41,4 @@ export const verify = (req, res, next) => {
   }
 
   res.unauthorized();
-}
+};

@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4040/"
+      "url": "http://localhost:4041/"
     }
   ],
   "paths": {
-    "/api/financialGoals/": {
+    "/api/paymentMethods/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/financialGoals/{id}": {
+    "/api/paymentMethods/{id}": {
       "get": {
         "description": "",
         "parameters": [

@@ -1,4 +1,4 @@
-import PaymentMethodRepository from "../infrastructure/database/PaymentMethodRepository.js";
+import PaymentMethodRepository from '../infrastructure/database/PaymentMethodRepository.js';
 
 export default {
   findAll: PaymentMethodRepository.findAll,

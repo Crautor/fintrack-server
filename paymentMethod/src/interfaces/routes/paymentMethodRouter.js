@@ -8,10 +8,10 @@ const router = Router();
 router.use(verifyJWT);
 
 router
-    .get('/', handler.findAll)
-    .get('/:id', handler.findById)
-    .post('/', validator(paymentMethodSchema), handler.create)
-    .put('/:id', validator(paymentMethodSchema), handler.update)
-    .delete('/:id', handler.remove);
+  .get('/', handler.findAll)
+  .get('/:id', handler.findById)
+  .post('/', validator(paymentMethodSchema), handler.create)
+  .put('/:id', validator(paymentMethodSchema), handler.update)
+  .delete('/:id', handler.remove);
 
 export default router;

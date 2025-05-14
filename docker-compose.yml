@@ -14,7 +14,6 @@ services:
     environment:
       DATABASE_URL: mysql://root:root@mysql-financialgoal:3306/financialgoal
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: fintrack
     ports:
@@ -22,7 +21,12 @@ services:
     networks:
       - financialgoal-network
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-financialgoal-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   financialgoal:
     build: ./financialGoal
@@ -34,14 +38,54 @@ services:
     env_file:
       - ./envs/financialGoal.env
     depends_on:
-      - mysql-financialgoal
+      mysql-financialgoal:
+        condition: service_healthy
     networks:
       - financialgoal-network
+
+  mysql-paymentmethod:
+    image: mysql:8.0
+    container_name: mysql-paymentmethod
+    environment:
+      DATABASE_URL: mysql://root:root@mysql-paymentmethod:3306/paymentmethod
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fintrack
+    ports:
+      - '3308:3306'
+    networks:
+      - paymentmethod-network
+    volumes:
+      - mysql-paymentmethod-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  paymentmethod:
+    build: ./paymentMethod
+    container_name: paymentmethod-container
+    volumes:
+      - ./paymentMethod:/app
+    ports:
+      - '3002:3002'
+    env_file:
+      - ./envs/paymentMethod.env
+    depends_on:
+      mysql-paymentmethod:
+        condition: service_healthy
+    networks:
+      - paymentmethod-network
 
 networks:
   financialgoal-network:
     driver: bridge
+  paymentmethod-network:
+    driver: bridge
 
 volumes:
-  mysql-data:
+  mysql-financialgoal-data:
+    driver: local
+  mysql-paymentmethod-data:
     driver: local

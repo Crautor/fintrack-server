@@ -1,7 +1,7 @@
 import FinancialGoalService from '../../application/FinancialGoalService.js';
 import { hateoas_item, hateoas_list } from '../../utils/hateoas.js';
 
-const baseUrl = '/api/financial-goals';
+const baseUrl = '/api/financialGoals';
 
 export const listFinancialGoals = async (req, res, next) => {
   const goals = await FinancialGoalService.getAll();

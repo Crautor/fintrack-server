@@ -7,7 +7,7 @@ export default (schema) => (req, res, next) => {
 
     next();
   } catch (err) {
-    res.payment_required({
+    res.forbidden({
       message: 'Validation failed',
       errors: err.errors,
     });

@@ -78,6 +78,17 @@ services:
     networks:
       - paymentmethod-network
 
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    volumes:
+      - ./api-gateway:/app
+    ports:
+      - '3000:3000'
+    networks:
+      - financialgoal-network
+      - paymentmethod-network
+
 networks:
   financialgoal-network:
     driver: bridge

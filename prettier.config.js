@@ -6,3 +6,5 @@ module.exports = {
   semi: true,
   endOfLine: 'auto',
 };
+
+// npx prettier "**/*.{js,ts,jsx,tsx,json,md,yml,yaml}" --write

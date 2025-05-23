@@ -8,6 +8,41 @@ services:
   #   env_file:
   #     - ./envs/auth.env
 
+  mysql-expense:
+    image: mysql:8.0
+    container_name: mysql-expense
+    environment:
+      DATABASE_URL: mysql://root:root@mysql-expense:3306/expense
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fintrack
+    ports:
+      - '3309:3306'
+    networks:
+      - expense-network
+    volumes:
+      - mysql-expense-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  expense:
+    build: ./expense
+    container_name: expense-container
+    volumes:
+      - ./expense:/app
+    ports:
+      - '3003:3003'
+    env_file:
+      - ./envs/expense.env
+    depends_on:
+      mysql-expense:
+        condition: service_healthy
+    networks:
+      - expense-network
+
   mysql-financialgoal:
     image: mysql:8.0
     container_name: mysql-financialgoal
@@ -86,16 +121,21 @@ services:
     ports:
       - '3000:3000'
     networks:
+      - expense-network
       - financialgoal-network
       - paymentmethod-network
 
 networks:
+  expense-network:
+    driver: bridge
   financialgoal-network:
     driver: bridge
   paymentmethod-network:
     driver: bridge
 
 volumes:
+  mysql-expense-data:
+    driver: local
   mysql-financialgoal-data:
     driver: local
   mysql-paymentmethod-data:

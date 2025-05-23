@@ -1,7 +1,7 @@
 import PaymentMethodService from '../../application/PaymentMethodService';
 import { hateoas_item, hateoas_list } from '../../utils/hateoas.js';
 
-const baseUrl = '/api/payment-methods';
+const baseUrl = '/api/paymentMethods';
 
 export const listPaymentMethods = async (req, res, next) => {
   const paymentMethods = await PaymentMethodService.getAll();

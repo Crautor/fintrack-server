@@ -4,8 +4,8 @@ const AutenticacaoMiddleware = require('../../infrastructure/middlewares/auth.mi
 class ControladorAutenticacao {
   async cadastrar(req, res) {
     try {
-      const { email, password } = req.body;
-      const tokens = await servicoAuth.register(email, password);
+      const { name, phone, birthdate, email, password } = req.body;
+      const tokens = await servicoAuth.register(name, phone, birthdate, email, password);
       AutenticacaoMiddleware.definirCookies(res, tokens);
       res.status(201).json({ mensagem: 'Cadastro realizado com sucesso.' });
     } catch (erro) {
@@ -57,6 +57,16 @@ class ControladorAutenticacao {
       res.json(resultado);
     } catch (erro) {
       res.status(400).json({ erro: erro.message });
+    }
+  }
+
+  async buscarPorEmail(req, res) {
+    try {
+      const { email } = req.params;
+      const user = await servicoAuth.getByEmail(email);
+      res.json(user);
+    } catch (erro) {
+      res.status(404).json({ erro: erro.message });
     }
   }
 }

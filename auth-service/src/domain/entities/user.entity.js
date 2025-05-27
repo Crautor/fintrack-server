@@ -1,8 +1,11 @@
 const bcrypt = require('bcryptjs');
 
 class User {
-  constructor(id, email, password, recoveryCode = null, recoveryExpires = null) {
+  constructor(id, name, phone = null, birthdate = null, email, password, recoveryCode = null, recoveryExpires = null) {
     this.id = id;
+    this.name = name;
+    this.phone = phone;
+    this.birthdate = birthdate;
     this.email = email;
     this.password = password;
     this.recoveryCode = recoveryCode;

@@ -26,6 +26,9 @@ class EventService {
   async publishUserCreated(user) {
     await this.publish(this.queues.USER_CREATED, {
       id: user.id,
+      name: user.name,
+      phone: user.phone,
+      birthdate: user.birthdate,
       email: user.email,
       createdAt: new Date(),
     });
@@ -34,6 +37,9 @@ class EventService {
   async publishUserUpdated(user) {
     await this.publish(this.queues.USER_UPDATED, {
       id: user.id,
+      name: user.name,
+      phone: user.phone,
+      birthdate: user.birthdate,
       email: user.email,
       updatedAt: new Date(),
     });
@@ -42,6 +48,9 @@ class EventService {
   async publishUserDeleted(user) {
     await this.publish(this.queues.USER_DELETED, {
       id: user.id,
+      name: user.name,
+      phone: user.phone,
+      birthdate: user.birthdate,
       email: user.email,
       deletedAt: new Date(),
     });
@@ -50,6 +59,9 @@ class EventService {
   async publishPasswordChanged(user) {
     await this.publish(this.queues.PASSWORD_CHANGED, {
       id: user.id,
+      name: user.name,
+      phone: user.phone,
+      birthdate: user.birthdate,
       email: user.email,
       changedAt: new Date(),
     });
@@ -66,6 +78,9 @@ class EventService {
   async publishLoginSuccess(user) {
     await this.publish(this.queues.LOGIN_SUCCESS, {
       id: user.id,
+      name: user.name,
+      phone: user.phone,
+      birthdate: user.birthdate,
       email: user.email,
       timestamp: new Date(),
     });

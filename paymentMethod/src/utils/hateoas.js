@@ -1,11 +1,13 @@
 export function hateoas_item(resource, baseUrl) {
-  const selfHref = baseUrl.includes(`/${resource.paymentMethodId}`)
-    ? baseUrl
-    : `${baseUrl}/${resource.paymentMethodId}`;
+  const cleanBaseUrl = baseUrl.replace(/\/$/, '');
 
-  const allHref = baseUrl.includes(`/${resource.paymentMethodId}`)
-    ? baseUrl.substring(0, baseUrl.lastIndexOf('/'))
-    : baseUrl;
+  const selfHref = cleanBaseUrl.includes(`/${resource.paymentMethodId}`)
+    ? cleanBaseUrl
+    : `${cleanBaseUrl}/${resource.paymentMethodId}`;
+
+  const allHref = cleanBaseUrl.includes(`/${resource.paymentMethodId}`)
+    ? cleanBaseUrl.substring(0, cleanBaseUrl.lastIndexOf('/'))
+    : cleanBaseUrl;
 
   return {
     ...resource,

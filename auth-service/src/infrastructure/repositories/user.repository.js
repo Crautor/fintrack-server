@@ -4,76 +4,61 @@ const User = require('../../domain/entities/user.entity');
 
 class UserModel extends Model {}
 
-UserModel.init({
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true
+UserModel.init(
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    recoveryCode: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    recoveryExpires: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
-  email: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false
+  {
+    sequelize,
+    modelName: 'User',
+    tableName: 'users',
   },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  recoveryCode: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  recoveryExpires: {
-    type: DataTypes.DATE,
-    allowNull: true
-  }
-}, {
-  sequelize,
-  modelName: 'User',
-  tableName: 'users'
-});
+);
 
 class UserRepository {
   async create(data) {
     console.log(`[DB] Creating user: ${data.email}`);
     const created = await UserModel.create({
       email: data.email,
-      password: data.password
+      password: data.password,
     });
 
-    return new User(
-      created.id,
-      created.email,
-      created.password,
-      created.recoveryCode,
-      created.recoveryExpires
-    );
+    return new User(created.id, created.email, created.password, created.recoveryCode, created.recoveryExpires);
   }
 
   async findByEmail(email) {
     const user = await UserModel.findOne({ where: { email } });
     if (!user) return null;
 
-    return new User(
-      user.id,
-      user.email,
-      user.password,
-      user.recoveryCode,
-      user.recoveryExpires
-    );
+    return new User(user.id, user.email, user.password, user.recoveryCode, user.recoveryExpires);
   }
 
   async findById(id) {
     const user = await UserModel.findByPk(id);
     if (!user) return null;
 
-    return new User(
-      user.id,
-      user.email,
-      user.password,
-      user.recoveryCode,
-      user.recoveryExpires
-    );
+    return new User(user.id, user.email, user.password, user.recoveryCode, user.recoveryExpires);
   }
 
   async update(id, newData) {
@@ -84,16 +69,10 @@ class UserRepository {
       email: newData.email,
       password: newData.password,
       recoveryCode: newData.recoveryCode,
-      recoveryExpires: newData.recoveryExpires
+      recoveryExpires: newData.recoveryExpires,
     });
 
-    return new User(
-      user.id,
-      user.email,
-      user.password,
-      user.recoveryCode,
-      user.recoveryExpires
-    );
+    return new User(user.id, user.email, user.password, user.recoveryCode, user.recoveryExpires);
   }
 
   async delete(id) {

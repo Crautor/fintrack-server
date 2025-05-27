@@ -25,11 +25,7 @@ class User {
   }
 
   verifyRecoveryCode(inputCode) {
-    return (
-      this.recoveryCode === inputCode &&
-      this.recoveryExpires &&
-      this.recoveryExpires > new Date()
-    );
+    return this.recoveryCode === inputCode && this.recoveryExpires && this.recoveryExpires > new Date();
   }
 }
 

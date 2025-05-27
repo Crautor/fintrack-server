@@ -30,7 +30,6 @@ class ConexaoFila {
         this.connection = null;
         this.channel = null;
       });
-
     } catch (err) {
       console.error('[Fila] Falha ao conectar:', err);
       throw err;

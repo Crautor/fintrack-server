@@ -9,14 +9,13 @@ class ServicoEmail {
       secure: true,
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
+        pass: process.env.SMTP_PASS,
+      },
     });
 
     this.tentativasMaximas = 5;
     this.tempoEspera = 5000;
   }
-
 
   async iniciar() {
     for (let tentativa = 1; tentativa <= this.tentativasMaximas; tentativa++) {
@@ -30,17 +29,15 @@ class ServicoEmail {
         console.error(`[E-mail] Erro na tentativa ${tentativa}:`, erro);
         if (tentativa < this.tentativasMaximas) {
           console.log(`[E-mail] Aguardando ${this.tempoEspera / 1000}s antes de nova tentativa...`);
-          await new Promise(resolve => setTimeout(resolve, this.tempoEspera));
+          await new Promise((resolve) => setTimeout(resolve, this.tempoEspera));
         }
       }
     }
     throw new Error('[E-mail] Falha ao iniciar serviço após várias tentativas');
   }
 
- 
   async configurarFila() {
     const canal = conexaoFila.channel;
-;
     await canal.assertQueue('email_queue', { durable: true });
 
     canal.consume('email_queue', async (mensagem) => {
@@ -54,16 +51,15 @@ class ServicoEmail {
           await this.enviarEmailRecuperacao(dados.email, dados.code);
         }
 
-        canal.ack(mensagem); 
+        canal.ack(mensagem);
       } catch (erro) {
         console.error('[E-mail] Erro ao processar mensagem:', erro);
-        canal.nack(mensagem); 
+        canal.nack(mensagem);
       }
     });
 
     console.log('[E-mail] Fila e consumidor configurados');
   }
-
 
   async enviarEmailRecuperacao(destinatario, codigo) {
     try {
@@ -76,7 +72,7 @@ class ServicoEmail {
           <p>Seu código de redefinição é: <strong>${codigo}</strong></p>
           <p>Este código expira em 15 minutos.</p>
           <p>Se você não pediu isso, pode ignorar este e-mail.</p>
-        `
+        `,
       };
 
       const resultado = await this.transportador.sendMail(mensagem);

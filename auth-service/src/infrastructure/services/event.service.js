@@ -9,7 +9,7 @@ class EventService {
       PASSWORD_CHANGED: 'auth.password.changed',
       PASSWORD_RESET_REQUESTED: 'auth.password.reset.requested',
       LOGIN_SUCCESS: 'auth.login.success',
-      LOGIN_FAILED: 'auth.login.failed'
+      LOGIN_FAILED: 'auth.login.failed',
     };
   }
 
@@ -27,7 +27,7 @@ class EventService {
     await this.publish(this.queues.USER_CREATED, {
       id: user.id,
       email: user.email,
-      createdAt: new Date()
+      createdAt: new Date(),
     });
   }
 
@@ -35,7 +35,7 @@ class EventService {
     await this.publish(this.queues.USER_UPDATED, {
       id: user.id,
       email: user.email,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
   }
 
@@ -43,7 +43,7 @@ class EventService {
     await this.publish(this.queues.USER_DELETED, {
       id: user.id,
       email: user.email,
-      deletedAt: new Date()
+      deletedAt: new Date(),
     });
   }
 
@@ -51,7 +51,7 @@ class EventService {
     await this.publish(this.queues.PASSWORD_CHANGED, {
       id: user.id,
       email: user.email,
-      changedAt: new Date()
+      changedAt: new Date(),
     });
   }
 
@@ -59,7 +59,7 @@ class EventService {
     await this.publish(this.queues.PASSWORD_RESET_REQUESTED, {
       email,
       code,
-      requestedAt: new Date()
+      requestedAt: new Date(),
     });
   }
 
@@ -67,7 +67,7 @@ class EventService {
     await this.publish(this.queues.LOGIN_SUCCESS, {
       id: user.id,
       email: user.email,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
 
@@ -75,7 +75,7 @@ class EventService {
     await this.publish(this.queues.LOGIN_FAILED, {
       email,
       reason,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
 

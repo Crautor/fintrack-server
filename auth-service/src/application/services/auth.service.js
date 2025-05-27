@@ -48,7 +48,7 @@ class AuthService {
 
     const updated = await userRepository.update(id, {
       ...user,
-      ...changes
+      ...changes,
     });
 
     await eventService.publishUserUpdated(updated);
@@ -78,7 +78,7 @@ class AuthService {
     await rabbitmqConfig.sendToQueue('email_queue', {
       type: 'password_reset',
       email: user.email,
-      code: code
+      code: code,
     });
 
     await eventService.publishPasswordResetRequested(user);
@@ -102,7 +102,7 @@ class AuthService {
       ...user,
       password: newUser.password,
       recoveryCode: null,
-      recoveryCodeExpires: null
+      recoveryCodeExpires: null,
     });
 
     await eventService.publishPasswordChanged(newUser);
@@ -125,7 +125,7 @@ class AuthService {
     console.log(`[DEBUG] JWT_SECRET: ${process.env.JWT_SECRET}`);
     const access = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '15m' });
     const refresh = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
-    console.log(`[DEBUG]`)
+    console.log(`[DEBUG]`);
     return { accessToken: access, refreshToken: refresh };
   }
 }

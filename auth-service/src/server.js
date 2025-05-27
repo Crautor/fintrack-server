@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json());
@@ -35,9 +35,7 @@ const iniciarServidor = async () => {
     await servicoEmail.iniciar();
 
     console.log('[Sistema] Eventos de domínio disponíveis:');
-    Object.values(servicoEventos.filas || {}).forEach((ev) =>
-      console.log(`- ${ev}`)
-    );
+    Object.values(servicoEventos.filas || {}).forEach((ev) => console.log(`- ${ev}`));
 
     app.listen(porta, '0.0.0.0', () => {
       console.log('[DEBUG] JWT_SECRET:', process.env.JWT_SECRET);

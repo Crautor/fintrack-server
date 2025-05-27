@@ -23,11 +23,7 @@ class UsuarioModel {
   }
 
   codigoValido(codigoEnviado) {
-    return (
-      this.codigo === codigoEnviado &&
-      this.expiracao &&
-      this.expiracao > new Date()
-    );
+    return this.codigo === codigoEnviado && this.expiracao && this.expiracao > new Date();
   }
 }
 

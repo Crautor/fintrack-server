@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 class AutenticacaoMiddleware {
-
   static async verificarToken(req, res, next) {
     try {
       const token = req.cookies['auth_token'];
@@ -21,27 +20,25 @@ class AutenticacaoMiddleware {
     }
   }
 
- 
   static definirCookies(res, { accessToken, refreshToken }) {
     const opcoes = {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      path: '/'
+      path: '/',
     };
 
     res.cookie('auth_token', accessToken, {
       ...opcoes,
-      maxAge: 15 * 60 * 1000 
+      maxAge: 15 * 60 * 1000,
     });
 
     res.cookie('refresh_token', refreshToken, {
       ...opcoes,
-      maxAge: 7 * 24 * 60 * 60 * 1000 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
   }
 
- 
   static limparCookies(res) {
     res.clearCookie('auth_token');
     res.clearCookie('refresh_token');

@@ -9,6 +9,7 @@ rotas.post('/login', controlador.entrar);
 rotas.post('/token', controlador.atualizarToken);
 rotas.post('/senha/solicitar', controlador.solicitarCodigoRecuperacao);
 rotas.post('/senha/redefinir', controlador.redefinirSenha);
+rotas.get('/usuario/:email', controlador.buscarPorEmail);
 
 rotas.post('/logout', MiddlewareAutenticacao.verificarToken, controlador.sair);
 

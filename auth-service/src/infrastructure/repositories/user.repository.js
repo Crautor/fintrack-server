@@ -11,6 +11,18 @@ UserModel.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    birthdate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -41,24 +53,54 @@ class UserRepository {
     console.log(`[DB] Creating user: ${data.email}`);
     const created = await UserModel.create({
       email: data.email,
+      name: data.name,
+      phone: data.phone,
+      birthdate: data.birthdate,
       password: data.password,
     });
 
-    return new User(created.id, created.email, created.password, created.recoveryCode, created.recoveryExpires);
+    return new User(
+      created.id,
+      created.name,
+      created.phone,
+      created.birthdate,
+      created.email,
+      created.password,
+      created.recoveryCode,
+      created.recoveryExpires,
+    );
   }
 
   async findByEmail(email) {
     const user = await UserModel.findOne({ where: { email } });
     if (!user) return null;
 
-    return new User(user.id, user.email, user.password, user.recoveryCode, user.recoveryExpires);
+    return new User(
+      user.id,
+      user.name,
+      user.phone,
+      user.birthdate,
+      user.email,
+      user.password,
+      user.recoveryCode,
+      user.recoveryExpires,
+    );
   }
 
   async findById(id) {
     const user = await UserModel.findByPk(id);
     if (!user) return null;
 
-    return new User(user.id, user.email, user.password, user.recoveryCode, user.recoveryExpires);
+    return new User(
+      user.id,
+      user.name,
+      user.phone,
+      user.birthdate,
+      user.email,
+      user.password,
+      user.recoveryCode,
+      user.recoveryExpires,
+    );
   }
 
   async update(id, newData) {
@@ -67,12 +109,24 @@ class UserRepository {
 
     await user.update({
       email: newData.email,
+      name: newData.name,
+      phone: newData.phone,
+      birthdate: newData.birthdate,
       password: newData.password,
       recoveryCode: newData.recoveryCode,
       recoveryExpires: newData.recoveryExpires,
     });
 
-    return new User(user.id, user.email, user.password, user.recoveryCode, user.recoveryExpires);
+    return new User(
+      user.id,
+      user.name,
+      user.phone,
+      user.birthdate,
+      user.email,
+      user.password,
+      user.recoveryCode,
+      user.recoveryExpires,
+    );
   }
 
   async delete(id) {

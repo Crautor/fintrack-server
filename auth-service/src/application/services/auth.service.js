@@ -7,14 +7,18 @@ const rabbitmqConfig = require('../../infrastructure/config/rabbitmq.config');
 
 class AuthService {
   // Registro de novo usuário
-  async register(email, password) {
+  async register(name, phone, birthdate, email, password) {
     const userExists = await userRepository.findByEmail(email);
     if (userExists) throw new Error('E-mail já cadastrado');
-
-    const newUser = new User(null, email, password);
+    console.log(`[Security] Validating new user registration: ${email}`);
+    const newUser = new User(null, name, phone, birthdate, email, password);
+    console.log(`[Security] Registering new user: ${newUser.email}`);
     await newUser.hashPassword();
 
     const createdUser = await userRepository.create({
+      name: newUser.name,
+      phone: newUser.phone,
+      birthdate: newUser.birthdate,
       email: newUser.email,
       password: newUser.password,
     });
@@ -119,6 +123,13 @@ class AuthService {
     } catch (err) {
       throw new Error('Erro ao validar token de atualização');
     }
+  }
+
+  // Obter usuário por e-mail
+  async getByEmail(email) {
+    const user = await userRepository.findByEmail(email);
+    if (!user) throw new Error('Usuário não encontrado');
+    return user;
   }
 
   generateTokens(user) {

@@ -13,5 +13,14 @@ model FinancialGoal {
   userId          Int
   value           Float
   limitDate       DateTime
-  status          String
+  status          FinancialGoalStatus
+  title           String
+  description     String?
+}
+
+enum FinancialGoalStatus {
+  Aberto
+  Em_Andamento
+  Expirado
+  Concluido
 }

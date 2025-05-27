@@ -1,11 +1,13 @@
 export function hateoas_item(resource, baseUrl) {
-  const selfHref = baseUrl.includes(`/${resource.financialGoalId}`)
-    ? baseUrl
-    : `${baseUrl}/${resource.financialGoalId}`;
+  const cleanBaseUrl = baseUrl.replace(/\/$/, '');
 
-  const allHref = baseUrl.includes(`/${resource.financialGoalId}`)
-    ? baseUrl.substring(0, baseUrl.lastIndexOf('/'))
-    : baseUrl;
+  const selfHref = cleanBaseUrl.includes(`/${resource.financialGoalId}`)
+    ? cleanBaseUrl
+    : `${cleanBaseUrl}/${resource.financialGoalId}`;
+
+  const allHref = cleanBaseUrl.includes(`/${resource.financialGoalId}`)
+    ? cleanBaseUrl.substring(0, cleanBaseUrl.lastIndexOf('/'))
+    : cleanBaseUrl;
 
   return {
     ...resource,

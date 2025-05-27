@@ -8,14 +8,17 @@ const app = express();
 const PORT = 3000;
 
 const services = {
-  expense: {
-    target: 'http://expense:3003/api/expenses',
-  },
   financialGoal: {
     target: 'http://financialgoal:3001/api/financialGoals',
   },
   paymentMethod: {
     target: 'http://paymentmethod:3002/api/paymentMethods',
+  },
+  expense: {
+    target: 'http://expense:3003/api/expenses',
+  },
+  auth: {
+    target: 'http://auth-service:3004/api/auth',
   },
 };
 
@@ -39,6 +42,14 @@ app.use(
   '/api/paymentMethods',
   createProxyMiddleware({
     target: services.paymentMethod.target,
+    changeOrigin: true,
+  }),
+);
+
+app.use(
+  '/api/auth',
+  createProxyMiddleware({
+    target: services.auth.target,
     changeOrigin: true,
   }),
 );

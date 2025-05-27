@@ -1,13 +1,4 @@
 services:
-  # server:
-  #   build: ./auth
-  #   volumes:
-  #     - ./auth:/app
-  #   ports:
-  #     - '2555:3000'
-  #   env_file:
-  #     - ./envs/auth.env
-
   mysql-expense:
     image: mysql:8.0
     container_name: mysql-expense
@@ -33,6 +24,7 @@ services:
     container_name: expense-container
     volumes:
       - ./expense:/app
+      - /app/node_modules
     ports:
       - '3003:3003'
     env_file:
@@ -68,6 +60,7 @@ services:
     container_name: financialgoal-container
     volumes:
       - ./financialGoal:/app
+      - /app/node_modules
     ports:
       - '3001:3001'
     env_file:
@@ -103,6 +96,7 @@ services:
     container_name: paymentmethod-container
     volumes:
       - ./paymentMethod:/app
+      - /app/node_modules
     ports:
       - '3002:3002'
     env_file:
@@ -118,12 +112,63 @@ services:
     container_name: api-gateway
     volumes:
       - ./api-gateway:/app
+      - /app/node_modules
     ports:
       - '3000:3000'
     networks:
       - expense-network
       - financialgoal-network
       - paymentmethod-network
+      - auth-network
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - '3004:3004'
+    env_file:
+      - ./envs/auth.env
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
+    networks:
+      - auth-network
+
+  mysql:
+    image: mysql:8
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=auth_db
+    volumes:
+      - mysql-auth-data:/var/lib/mysql
+    networks:
+      - auth-network
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - rabbitmq-auth-data:/var/lib/rabbitmq
+    networks:
+      - auth-network
+    healthcheck:
+      test: ['CMD', 'rabbitmqctl', 'status']
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 networks:
   expense-network:
@@ -132,6 +177,8 @@ networks:
     driver: bridge
   paymentmethod-network:
     driver: bridge
+  auth-network:
+    driver: bridge
 
 volumes:
   mysql-expense-data:
@@ -139,4 +186,8 @@ volumes:
   mysql-financialgoal-data:
     driver: local
   mysql-paymentmethod-data:
+    driver: local
+  mysql-auth-data:
+    driver: local
+  rabbitmq-auth-data:
     driver: local

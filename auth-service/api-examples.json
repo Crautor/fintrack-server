@@ -1,7 +1,7 @@
 {
     "exemplos": {
       "cadastro": {
-        "url": "http://localhost:3000/api/auth/cadastro",
+        "url": "http://localhost:3004/api/auth/cadastro",
         "method": "POST",
         "headers": {
           "Content-Type": "application/json"
@@ -12,7 +12,7 @@
         }
       },
       "login": {
-        "url": "http://localhost:3000/api/auth/login",
+        "url": "http://localhost:3004/api/auth/login",
         "method": "POST",
         "headers": {
           "Content-Type": "application/json"
@@ -23,7 +23,7 @@
         }
       },
       "token": {
-        "url": "http://localhost:3000/api/auth/token",
+        "url": "http://localhost:3004/api/auth/token",
         "method": "POST",
         "headers": {
           "Content-Type": "application/json"
@@ -33,13 +33,13 @@
         }
       },
       "logout": {
-        "url": "http://localhost:3000/api/auth/logout",
+        "url": "http://localhost:3004/api/auth/logout",
         "method": "POST",
         "headers": {},
         "body": {}
       },
       "solicitar_codigo": {
-        "url": "http://localhost:3000/api/auth/password/solicitar",
+        "url": "http://localhost:3004/api/auth/password/solicitar",
         "method": "POST",
         "headers": {
           "Content-Type": "application/json"
@@ -49,7 +49,7 @@
         }
       },
       "redefinir_password": {
-        "url": "http://localhost:3000/api/auth/password/redefinir",
+        "url": "http://localhost:3004/api/auth/password/redefinir",
         "method": "POST",
         "headers": {
           "Content-Type": "application/json"

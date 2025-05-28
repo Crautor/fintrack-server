@@ -1,4 +1,40 @@
 services:
+  mysql-saving:
+    image: mysql:8.0
+    container_name: mysql-saving
+    environment:
+      DATABASE_URL: mysql://root:root@mysql-saving:3306/saving
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fintrack
+    ports:
+      - '3310:3306'
+    networks:
+      - saving-network
+    volumes:
+      - mysql-saving-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  saving:
+    build: ./saving
+    container_name: saving-container
+    volumes:
+      - ./saving:/app
+      - /app/node_modules
+    ports:
+      - '3005:3005'
+    env_file:
+      - ./envs/saving.env
+    depends_on:
+      mysql-saving:
+        condition: service_healthy
+    networks:
+      - saving-network
+
   mysql-expense:
     image: mysql:8.0
     container_name: mysql-expense
@@ -116,6 +152,7 @@ services:
     ports:
       - '3000:3000'
     networks:
+      - saving-network
       - expense-network
       - financialgoal-network
       - paymentmethod-network
@@ -141,7 +178,7 @@ services:
   mysql:
     image: mysql:8
     ports:
-      - '3306:3306'
+      - '3305:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=auth_db
@@ -171,6 +208,8 @@ services:
       retries: 10
 
 networks:
+  saving-network:
+    driver: bridge
   expense-network:
     driver: bridge
   financialgoal-network:
@@ -181,6 +220,8 @@ networks:
     driver: bridge
 
 volumes:
+  mysql-saving-data:
+    driver: local
   mysql-expense-data:
     driver: local
   mysql-financialgoal-data:

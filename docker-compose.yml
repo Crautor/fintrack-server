@@ -35,41 +35,41 @@ services:
     networks:
       - saving-network
 
-  mysql-expense:
+  mysql-transaction:
     image: mysql:8.0
-    container_name: mysql-expense
+    container_name: mysql-transaction
     environment:
-      DATABASE_URL: mysql://root:root@mysql-expense:3306/expense
+      DATABASE_URL: mysql://root:root@mysql-transaction:3306/transaction
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: fintrack
     ports:
       - '3309:3306'
     networks:
-      - expense-network
+      - transaction-network
     volumes:
-      - mysql-expense-data:/var/lib/mysql
+      - mysql-transaction-data:/var/lib/mysql
     healthcheck:
       test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
       interval: 10s
       timeout: 5s
       retries: 5
 
-  expense:
-    build: ./expense
-    container_name: expense-container
+  transaction:
+    build: ./transaction
+    container_name: transaction-container
     volumes:
-      - ./expense:/app
+      - ./transaction:/app
       - /app/node_modules
     ports:
       - '3003:3003'
     env_file:
-      - ./envs/expense.env
+      - ./envs/transaction.env
     depends_on:
-      mysql-expense:
+      mysql-transaction:
         condition: service_healthy
     networks:
-      - expense-network
+      - transaction-network
 
   mysql-financialgoal:
     image: mysql:8.0
@@ -153,7 +153,7 @@ services:
       - '3000:3000'
     networks:
       - saving-network
-      - expense-network
+      - transaction-network
       - financialgoal-network
       - paymentmethod-network
       - auth-network
@@ -210,7 +210,7 @@ services:
 networks:
   saving-network:
     driver: bridge
-  expense-network:
+  transaction-network:
     driver: bridge
   financialgoal-network:
     driver: bridge
@@ -222,7 +222,7 @@ networks:
 volumes:
   mysql-saving-data:
     driver: local
-  mysql-expense-data:
+  mysql-transaction-data:
     driver: local
   mysql-financialgoal-data:
     driver: local

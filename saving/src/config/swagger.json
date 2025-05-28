@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/api/paymentMethods/": {
+    "/api/savings/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/paymentMethods/{id}": {
+    "/api/savings/{id}": {
       "get": {
         "description": "",
         "parameters": [

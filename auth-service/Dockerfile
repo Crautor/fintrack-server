@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expõe a porta padrão da aplicação (ajuste se necessário)
-EXPOSE 3000
+EXPOSE 3004
 
 # Comando para iniciar o serviço em modo desenvolvimento
 CMD ["npm", "run", "dev"]

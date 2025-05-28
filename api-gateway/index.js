@@ -20,7 +20,18 @@ const services = {
   auth: {
     target: 'http://auth-service:3004/api/auth',
   },
+  saving: {
+    target: 'http://saving:3005/api/savings',
+  },
 };
+
+app.use(
+  '/api/savings',
+  createProxyMiddleware({
+    target: services.saving.target,
+    changeOrigin: true,
+  }),
+);
 
 app.use(
   '/api/expenses',

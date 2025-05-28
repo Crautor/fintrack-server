@@ -4,12 +4,12 @@ import { hateoas_item, hateoas_list } from '../../utils/hateoas.js';
 const baseUrl = '/api/paymentMethods';
 
 export const listPaymentMethods = async (req, res, next) => {
-  const paymentMethods = await PaymentMethodService.getAll();
+  const paymentMethods = await PaymentMethodService.findAll();
   res.json(hateoas_list(paymentMethods, baseUrl));
 };
 
 export const getPaymentMethod = async (req, res, next) => {
-  const paymentMethod = await PaymentMethodService.getById(req.params.id);
+  const paymentMethod = await PaymentMethodService.findById(req.params.id);
   if (!paymentMethod) return res.not_found.json({ error: 'Not found' });
   res.json(hateoas_item(paymentMethod, baseUrl));
 };
@@ -25,6 +25,6 @@ export const updatePaymentMethod = async (req, res, next) => {
 };
 
 export const deletePaymentMethod = async (req, res, next) => {
-  await PaymentMethodService.delete(req.params.id);
+  await PaymentMethodService.remove(req.params.id);
   res.no_content().end();
 };

@@ -10,12 +10,12 @@ const servicoEmail = require('./infrastructure/services/email.service');
 const servicoEventos = require('./infrastructure/services/event.service');
 
 const app = express();
-const porta = process.env.PORT || 3001;
+const porta = process.env.PORT || 3004;
 
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'http://localhost:3004',
     credentials: true,
   }),
 );

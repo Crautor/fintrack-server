@@ -4,12 +4,12 @@ import { hateoas_item, hateoas_list } from '../../utils/hateoas.js';
 const baseUrl = '/api/financialGoals';
 
 export const listFinancialGoals = async (req, res, next) => {
-  const goals = await FinancialGoalService.getAll();
+  const goals = await FinancialGoalService.findAll();
   res.json(hateoas_list(goals, baseUrl));
 };
 
 export const getFinancialGoal = async (req, res, next) => {
-  const goal = await FinancialGoalService.getById(req.params.id);
+  const goal = await FinancialGoalService.findById(req.params.id);
   if (!goal) return res.not_found.json({ error: 'Not found' });
   res.json(hateoas_item(goal, baseUrl));
 };
@@ -25,6 +25,6 @@ export const updateFinancialGoal = async (req, res, next) => {
 };
 
 export const deleteFinancialGoal = async (req, res, next) => {
-  await FinancialGoalService.delete(req.params.id);
+  await FinancialGoalService.remove(req.params.id);
   res.no_content().end();
 };

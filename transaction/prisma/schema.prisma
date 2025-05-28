@@ -1,0 +1,25 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows", "debian-openssl-3.0.x"]
+}
+
+model Transaction {
+  transactionId     Int      @id @default(autoincrement())
+  userId            Int
+  value             Float
+  categoryId        Int
+  transactionDate   DateTime
+  description       String?
+  recurrence        Boolean
+  type              TransactionType
+}
+
+enum TransactionType {
+  Income
+  Expense
+}

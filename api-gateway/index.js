@@ -14,8 +14,8 @@ const services = {
   paymentMethod: {
     target: 'http://paymentmethod:3002/api/paymentMethods',
   },
-  expense: {
-    target: 'http://expense:3003/api/expenses',
+  transaction: {
+    target: 'http://transaction:3003/api/transactions',
   },
   auth: {
     target: 'http://auth-service:3004/api/auth',
@@ -34,9 +34,9 @@ app.use(
 );
 
 app.use(
-  '/api/expenses',
+  '/api/transactions',
   createProxyMiddleware({
-    target: services.expense.target,
+    target: services.transaction.target,
     changeOrigin: true,
   }),
 );

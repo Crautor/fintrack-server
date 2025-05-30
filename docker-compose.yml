@@ -201,6 +201,8 @@ services:
       - rabbitmq-auth-data:/var/lib/rabbitmq
     networks:
       - auth-network
+    mem_limit: 256m
+    cpus: 0.5
     healthcheck:
       test: ['CMD', 'rabbitmqctl', 'status']
       interval: 5s

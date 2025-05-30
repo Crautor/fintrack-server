@@ -134,6 +134,23 @@ class UserRepository {
     if (!user) throw new Error('User not found for deletion');
     await user.destroy();
   }
+  async findAll() {
+    const users = await UserModel.findAll();
+
+    return users.map(
+      (user) =>
+        new User(
+          user.id,
+          user.name,
+          user.phone,
+          user.birthdate,
+          user.email,
+          user.password,
+          user.recoveryCode,
+          user.recoveryExpires,
+        ),
+    );
+  }
 }
 
 module.exports = new UserRepository();

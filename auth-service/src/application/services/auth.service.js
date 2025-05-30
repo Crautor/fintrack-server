@@ -139,6 +139,20 @@ class AuthService {
     console.log(`[DEBUG]`);
     return { accessToken: access, refreshToken: refresh };
   }
+
+  async verifyRecoveryCode(email, code) {
+    const user = await userRepository.findByEmail(email);
+    if (!user) throw new Error('Usuário não localizado');
+
+    if (!user.verifyRecoveryCode(code)) {
+      throw new Error('Código inválido ou expirado');
+    }
+    return true;
+  }
+  async getAllUsers() {
+    const users = await userRepository.findAll();
+    return users;
+  }
 }
 
 module.exports = new AuthService();

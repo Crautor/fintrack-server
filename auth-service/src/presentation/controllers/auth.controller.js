@@ -69,6 +69,25 @@ class ControladorAutenticacao {
       res.status(404).json({ erro: erro.message });
     }
   }
+
+  async validarCodigo(req, res) {
+    try {
+      const { email, code } = req.body;
+      const isValid = await servicoAuth.verifyRecoveryCode(email, code);
+      res.json({ message: 'Código de recuperação válido', isValid: isValid });
+    } catch (erro) {
+      res.status(400).json({ erro: erro.message });
+    }
+  }
+
+  async buscarTodosUsuarios(req, res) {
+    try {
+      const usuarios = await servicoAuth.getAllUsers();
+      res.json(usuarios);
+    } catch (erro) {
+      res.status(500).json({ erro: erro.message });
+    }
+  }
 }
 
 module.exports = new ControladorAutenticacao();

@@ -153,8 +153,6 @@ class AuthService {
     const users = await userRepository.findAll();
     return users;
   }
-
-
 }
 
 module.exports = new AuthService();

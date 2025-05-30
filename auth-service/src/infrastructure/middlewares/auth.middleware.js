@@ -22,7 +22,6 @@ class AutenticacaoMiddleware {
 
   static definirCookies(res, { accessToken, refreshToken }) {
     const opcoes = {
-      httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       path: '/',

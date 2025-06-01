@@ -98,8 +98,9 @@ class AuthService {
     if (!user.verifyRecoveryCode(code)) {
       throw new Error('Código inválido ou expirado');
     }
+    const newUser = new User(user.id, user.name, user.phone, user.birthdate, user.email, newPassword);
 
-    const newUser = new User(user.id, user.email, newPassword);
+    console.log(`[Security] Resetting password for user: ${newUser.email}`);
     await newUser.hashPassword();
 
     await userRepository.update(user.id, {

@@ -23,8 +23,18 @@ const services = {
   saving: {
     target: 'http://saving:3005/api/savings',
   },
+  category: {
+    target: 'http://category:3006/api/category',
+  },
 };
 
+app.use(
+  '/api/category',
+  createProxyMiddleware({
+    target: services.category.target,
+    changeOrigin: true,
+  }),
+);
 app.use(
   '/api/savings',
   createProxyMiddleware({

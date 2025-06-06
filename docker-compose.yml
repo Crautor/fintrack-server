@@ -1,4 +1,40 @@
 services:
+  mysql-category:
+    image: mysql:8.0
+    container_name: mysql-category
+    environment:
+      DATABASE_URL: mysql://root:root@mysql-category:3306/category
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fintrack
+    ports:
+      - '3311:3306'
+    networks:
+      - category-network
+    volumes:
+      - mysql-category-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  category:
+    build: ./category
+    container_name: category-container
+    volumes:
+      - ./category:/app
+      - /app/node_modules
+    ports:
+      - '3006:3006'
+    env_file:
+      - ./envs/category.env
+    depends_on:
+      mysql-category:
+        condition: service_healthy
+    networks:
+      - category-network
+
   mysql-saving:
     image: mysql:8.0
     container_name: mysql-saving
@@ -157,6 +193,7 @@ services:
       - financialgoal-network
       - paymentmethod-network
       - auth-network
+      - category-network
 
   auth-service:
     build: ./auth-service
@@ -210,6 +247,8 @@ services:
       retries: 10
 
 networks:
+  category-network:
+    driver: bridge
   saving-network:
     driver: bridge
   transaction-network:
@@ -222,6 +261,8 @@ networks:
     driver: bridge
 
 volumes:
+  mysql-category-data:
+    driver: local
   mysql-saving-data:
     driver: local
   mysql-transaction-data:

@@ -197,11 +197,6 @@
             }
           }
         ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "Dados do usuário retornados com sucesso.",

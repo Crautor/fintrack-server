@@ -3,7 +3,6 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-
 dotenv.config();
 
 const app = express();

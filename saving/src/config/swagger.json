@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4041/"
+      "url": "http://localhost:3005/"
     }
   ],
   "paths": {
-    "/api/savings/": {
+    "/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/savings/{id}": {
+    "/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -91,30 +91,177 @@
       "InternalServerError": {
         "type": "object",
         "properties": {
-          "code": {
+          "type": {
             "type": "string",
-            "example": ""
+            "example": "object"
           },
-          "message": {
-            "type": "string",
-            "example": ""
+          "properties": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "message": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              }
+            }
           }
         }
       },
       "User": {
         "type": "object",
         "properties": {
-          "name": {
+          "type": {
             "type": "string",
-            "example": ""
+            "example": "object"
           },
-          "email": {
+          "properties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "email": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "password": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Saving": {
+        "type": "object",
+        "properties": {
+          "type": {
             "type": "string",
-            "example": ""
+            "example": "object"
           },
-          "password": {
-            "type": "string",
-            "example": ""
+          "properties": {
+            "type": "object",
+            "properties": {
+              "savingId": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "integer"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "userId": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "integer"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 123
+                  }
+                }
+              },
+              "value": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "number"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "float"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 1500.5
+                  }
+                }
+              },
+              "financialGoalId": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "integer"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 10
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Poupança para férias"
+                  },
+                  "nullable": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              },
+              "title": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Férias 2025"
+                  },
+                  "nullable": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              }
+            }
           }
         }
       }

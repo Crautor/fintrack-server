@@ -8,6 +8,12 @@ const rotasAutenticacao = require('./presentation/routes/auth.routes');
 const { syncDatabase } = require('./infrastructure/config/database.config');
 const servicoEmail = require('./infrastructure/services/email.service');
 const servicoEventos = require('./infrastructure/services/event.service');
+const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
+const path = require('path');
+
+const swaggerPath = path.join(__dirname, './config/swagger.json');
+const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, 'utf8'));
 
 const app = express();
 const porta = process.env.PORT || 3004;
@@ -28,6 +34,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', rotasAutenticacao);
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const iniciarServidor = async () => {
   try {

@@ -61,7 +61,7 @@ router.post('/', validator(financialGoalSchema), handler.create);
     }
   }
 */
-router.put('/:id', validator(financialGoalSchema), handler.update);
+router.put('/:id', handler.update);
 
 /* 
   #swagger.tags = ['FinancialGoal']

@@ -10,12 +10,13 @@ generator client {
 
 model FinancialGoal {
   financialGoalId Int      @id @default(autoincrement())
-  userId          Int
+  userId          String
   value           Float
   limitDate       DateTime
   status          FinancialGoalStatus
   title           String
   description     String?
+  icon            Int
 }
 
 enum FinancialGoalStatus {

@@ -26,6 +26,12 @@ export default (req, res, next) => {
     res.status(httpStatus.NOT_FOUND).send();
   };
 
+  res.bad_request = (err) => {
+    res.status(httpStatus.BAD_REQUEST).json({
+      message: err || 'Bad Request',
+    });
+  };
+
   res.payment_required = (err) => {
     res.status(httpStatus.PAYMENT_REQUIRED).json(err);
   };

@@ -112,7 +112,7 @@ rotas.post('/senha/redefinir', controlador.redefinirSenha);
     type: 'string'
   }
 */
-rotas.get('/usuario/:email', MiddlewareAutenticacao.verificarToken, controlador.buscarPorEmail);
+rotas.get('/usuario/:email', controlador.buscarPorEmail);
 
 /* 
   #swagger.tags = ['Auth']

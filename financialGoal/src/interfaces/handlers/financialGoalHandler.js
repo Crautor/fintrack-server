@@ -29,7 +29,7 @@ export const create = async (req, res, next) => {
       title,
       description,
       icon,
-    }
+    };
     const response = await financialGoalService.create(data);
     res.created(response);
   } catch (err) {
@@ -64,7 +64,7 @@ export const findById = async (req, res, next) => {
     if (!usuario) {
       return res.not_found('Usuário não encontrado');
     }
-    const item = await financialGoalService.findById({id:req.params.id, userId:usuario.id});
+    const item = await financialGoalService.findById({ id: req.params.id, userId: usuario.id });
     if (!item) return res.not_found();
     res.hateoas_item(item);
   } catch (err) {

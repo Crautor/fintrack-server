@@ -1,7 +1,7 @@
 import yup from 'yup';
 
 export default yup.object().shape({
-  email: yup.string().email("Email Inválido").required('Email is required'),
+  email: yup.string().email('Email Inválido').required('Email is required'),
   value: yup.number().positive('Must be positive (value)').required('Required (value)'),
   limitDate: yup.date().required('Required (limitDate)'),
   status: yup

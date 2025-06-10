@@ -1,5 +1,5 @@
 export default class FinancialGoal {
-  constructor({ financialGoalId, userId, value, limitDate, status, title, description }) {
+  constructor({ financialGoalId, userId, value, limitDate, status, title, description, icon }) {
     this.financialGoalId = financialGoalId;
     this.userId = userId;
     this.value = value;
@@ -7,5 +7,6 @@ export default class FinancialGoal {
     this.status = status;
     this.title = title;
     this.description = description;
+    this.icon = icon;
   }
 }

@@ -1,12 +1,18 @@
 import prisma from '../prismaClient.js';
 
 export default {
-  async findAll() {
-    return prisma.financialGoal.findMany();
+  async findAll(userId) {
+    return prisma.financialGoal.findMany({
+      where: { userId: userId },
+    });
   },
 
-  async findById(id) {
-    return prisma.financialGoal.findUnique({ where: { financialGoalId: Number(id) } });
+  async findById({ id, userId }) {
+    const where = {
+      financialGoalId: Number(id),
+      userId: userId,
+    };
+    return prisma.financialGoal.findFirst({ where });
   },
 
   async create(data) {

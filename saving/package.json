@@ -22,6 +22,7 @@
     "paymentmethod": "file:",
     "saving": "file:",
     "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^4.6.3",
     "yup": "^1.6.1"
   }
 }

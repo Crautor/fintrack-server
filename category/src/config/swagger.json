@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4041/"
+      "url": "http://localhost:3006/"
     }
   ],
   "paths": {
-    "/api/savings/": {
+    "/api/category/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/savings/{id}": {
+    "/api/category/{id}": {
       "get": {
         "description": "",
         "parameters": [

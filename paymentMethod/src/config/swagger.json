@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4041/"
+      "url": "http://localhost:3002/"
     }
   ],
   "paths": {
-    "/api/paymentMethods/": {
+    "/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/paymentMethods/{id}": {
+    "/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -91,30 +91,113 @@
       "InternalServerError": {
         "type": "object",
         "properties": {
-          "code": {
+          "type": {
             "type": "string",
-            "example": ""
+            "example": "object"
           },
-          "message": {
-            "type": "string",
-            "example": ""
+          "properties": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "message": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              }
+            }
           }
         }
       },
       "User": {
         "type": "object",
         "properties": {
-          "name": {
+          "type": {
             "type": "string",
-            "example": ""
+            "example": "object"
           },
-          "email": {
+          "properties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "email": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "password": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "PaymentMethod": {
+        "type": "object",
+        "properties": {
+          "type": {
             "type": "string",
-            "example": ""
+            "example": "object"
           },
-          "password": {
-            "type": "string",
-            "example": ""
+          "properties": {
+            "type": "object",
+            "properties": {
+              "paymentMethodId": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "integer"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Cartão de Crédito"
+                  }
+                }
+              }
+            }
           }
         }
       }

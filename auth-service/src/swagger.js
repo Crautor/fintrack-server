@@ -8,7 +8,7 @@ const doc = {
   },
   servers: [
     {
-      url: 'http://localhost:3002/',
+      url: 'http://localhost:3004/',
     },
   ],
   components: {
@@ -23,22 +23,14 @@ const doc = {
       User: {
         type: 'object',
         properties: {
-          name: { type: 'string' },
-          email: { type: 'string' },
-          password: { type: 'string' },
-        },
-      },
-      PaymentMethod: {
-        type: 'object',
-        properties: {
-          paymentMethodId: {
-            type: 'integer',
-            example: 1,
-          },
-          name: {
-            type: 'string',
-            example: 'Cartão de Crédito',
-          },
+          id: { type: 'integer', example: 1 },
+          name: { type: 'string', example: 'João Silva' },
+          phone: { type: 'string', nullable: true, example: '11999999999' },
+          birthdate: { type: 'string', format: 'date', nullable: true, example: '1990-01-01' },
+          email: { type: 'string', format: 'email', example: 'joao@example.com' },
+          password: { type: 'string', example: 'SenhaForte123' },
+          recoveryCode: { type: 'string', nullable: true, example: 'ABC123' },
+          recoveryExpires: { type: 'string', format: 'date-time', nullable: true, example: '2025-06-10T15:00:00Z' },
         },
       },
     },
@@ -52,7 +44,7 @@ const doc = {
 };
 
 const outputFile = './config/swagger.json';
-const endpointsFiles = ['./interfaces/routes/paymentMethodRouter.js'];
+const endpointsFiles = ['./presentation/routes/auth.routes.js'];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
   await import('./server.js');

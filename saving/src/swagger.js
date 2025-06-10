@@ -8,19 +8,57 @@ const doc = {
   },
   servers: [
     {
-      url: 'http://localhost:4041/',
+      url: 'http://localhost:3005/',
     },
   ],
   components: {
     schemas: {
       InternalServerError: {
-        code: '',
-        message: '',
+        type: 'object',
+        properties: {
+          code: { type: 'string' },
+          message: { type: 'string' },
+        },
       },
       User: {
-        name: '',
-        email: '',
-        password: '',
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          email: { type: 'string' },
+          password: { type: 'string' },
+        },
+      },
+      Saving: {
+        type: 'object',
+        properties: {
+          savingId: {
+            type: 'integer',
+            example: 1,
+          },
+          userId: {
+            type: 'integer',
+            example: 123,
+          },
+          value: {
+            type: 'number',
+            format: 'float',
+            example: 1500.5,
+          },
+          financialGoalId: {
+            type: 'integer',
+            example: 10,
+          },
+          description: {
+            type: 'string',
+            example: 'Poupança para férias',
+            nullable: true,
+          },
+          title: {
+            type: 'string',
+            example: 'Férias 2025',
+            nullable: true,
+          },
+        },
       },
     },
     securitySchemes: {
@@ -33,7 +71,7 @@ const doc = {
 };
 
 const outputFile = './config/swagger.json';
-const endpointsFiles = ['./server.js'];
+const endpointsFiles = ['./interfaces/routes/savingRouter.js'];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
   await import('./server.js');

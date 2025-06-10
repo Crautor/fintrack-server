@@ -1,12 +1,19 @@
 import prisma from '../prismaClient.js';
 
 export default {
-  async findAll() {
-    return prisma.category.findMany();
+  async findAll(userId) {
+    return prisma.category.findMany({
+      where: { userId: userId },
+    });
   },
 
-  async findById(id) {
-    return prisma.category.findUnique({ where: { categoryId: Number(id) } });
+  async findById({ id, userId }) {
+    const where = {
+      categoryId: Number(id),
+      userId: userId,
+    };
+
+    return prisma.category.findFirst({ where });
   },
 
   async create(data) {

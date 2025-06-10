@@ -12,4 +12,5 @@ model Category {
   categoryId Int    @id @default(autoincrement())
   name       String
   icon       String
+  userId     String
 }

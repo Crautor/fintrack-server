@@ -1,6 +1,8 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 
 dotenv.config();
 
@@ -27,6 +29,8 @@ const services = {
     target: 'http://category:3006/api/category',
   },
 };
+
+app.use(cors());
 
 app.use(
   '/api/category',

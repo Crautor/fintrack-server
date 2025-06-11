@@ -35,7 +35,9 @@ router.get('/:id', handler.findById);
     required: true,
     content: {
       "application/json": {
-        schema: { $ref: "#/components/schemas/Category" }
+        schema: {
+          $ref: "#/components/schemas/Category"
+        }
       }
     }
   }
@@ -56,7 +58,9 @@ router.post('/', validator(categorySchema), handler.create);
     required: true,
     content: {
       "application/json": {
-        schema: { $ref: "#/components/schemas/Category" }
+        schema: {
+          $ref: "#/components/schemas/Category"
+        }
       }
     }
   }

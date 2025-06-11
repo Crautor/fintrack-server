@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/": {
+    "/api/paymentMethods/": {
       "get": {
         "description": "",
         "responses": {
@@ -21,7 +21,17 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Cria um novo método de pagamento",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentMethod"
+              }
+            }
+          }
+        },
         "responses": {
           "default": {
             "description": ""
@@ -29,7 +39,7 @@
         }
       }
     },
-    "/{id}": {
+    "/api/paymentMethods/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -49,7 +59,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Atualiza um método de pagamento existente",
         "parameters": [
           {
             "name": "id",
@@ -60,6 +70,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentMethod"
+              }
+            }
+          }
+        },
         "responses": {
           "default": {
             "description": ""
@@ -88,116 +108,16 @@
   },
   "components": {
     "schemas": {
-      "InternalServerError": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "message": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "email": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "password": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "PaymentMethod": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
+          "paymentMethodId": {
+            "type": "integer",
+            "example": 1
           },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "paymentMethodId": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "integer"
-                  },
-                  "example": {
-                    "type": "number",
-                    "example": 1
-                  }
-                }
-              },
-              "name": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Cartão de Crédito"
-                  }
-                }
-              }
-            }
+          "name": {
+            "type": "string",
+            "example": "Cartão de Crédito"
           }
         }
       }

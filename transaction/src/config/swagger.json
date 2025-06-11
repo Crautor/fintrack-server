@@ -21,66 +21,86 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Cria uma nova transação",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transaction"
+              }
+            }
+          }
+        },
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Transação criada com sucesso"
           }
         }
       }
     },
     "/api/transactions/{id}": {
       "get": {
-        "description": "",
+        "description": "Busca transação por ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Transação encontrada"
           }
         }
       },
       "put": {
-        "description": "",
+        "description": "Atualiza transação por ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transaction"
+              }
+            }
+          }
+        },
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Transação atualizada com sucesso"
           }
         }
       },
       "delete": {
-        "description": "",
+        "description": "Remove transação por ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "Transação deletada com sucesso"
           }
         }
       }
@@ -88,35 +108,43 @@
   },
   "components": {
     "schemas": {
-      "InternalServerError": {
+      "Transaction": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string",
-            "example": ""
+          "userId": {
+            "type": "integer",
+            "example": 1
           },
-          "message": {
+          "value": {
+            "type": "number",
+            "format": "float",
+            "example": 150.75
+          },
+          "categoryId": {
+            "type": "integer",
+            "example": 3
+          },
+          "transactionDate": {
             "type": "string",
-            "example": ""
+            "format": "date-time",
+            "example": "2025-06-10T14:30:00Z"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "example": "Pagamento da fatura"
+          },
+          "recurrence": {
+            "type": "boolean",
+            "example": false
+          },
+          "type": {
+            "type": "string",
+            "enum": ["Income", "Expense"],
+            "example": "Income"
           }
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": ""
-          },
-          "email": {
-            "type": "string",
-            "example": ""
-          },
-          "password": {
-            "type": "string",
-            "example": ""
-          }
-        }
+        },
+        "required": ["userId", "value", "categoryId", "transactionDate", "recurrence", "type"]
       }
     },
     "securitySchemes": {

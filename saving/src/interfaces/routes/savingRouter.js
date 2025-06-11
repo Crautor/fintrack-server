@@ -35,7 +35,9 @@ router.get('/:id', handler.findById);
     required: true,
     content: {
       "application/json": {
-        schema: { $ref: "#/components/schemas/Saving" }
+        schema: {
+          $ref: "#/components/schemas/Saving"
+        }
       }
     }
   }
@@ -56,7 +58,9 @@ router.post('/', validator(savingSchema), handler.create);
     required: true,
     content: {
       "application/json": {
-        schema: { $ref: "#/components/schemas/Saving" }
+        schema: {
+          $ref: "#/components/schemas/Saving"
+        }
       }
     }
   }

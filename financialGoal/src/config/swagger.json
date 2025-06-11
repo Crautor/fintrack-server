@@ -21,7 +21,17 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Cria uma nova meta financeira",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinancialGoal"
+              }
+            }
+          }
+        },
         "responses": {
           "default": {
             "description": ""
@@ -49,7 +59,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Atualiza uma meta financeira existente",
         "parameters": [
           {
             "name": "id",
@@ -60,6 +70,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinancialGoal"
+              }
+            }
+          }
+        },
         "responses": {
           "default": {
             "description": ""
@@ -88,35 +108,44 @@
   },
   "components": {
     "schemas": {
-      "InternalServerError": {
+      "FinancialGoal": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string",
-            "example": ""
+          "financialGoalId": {
+            "type": "integer",
+            "example": 1,
+            "readOnly": true
           },
-          "message": {
+          "userId": {
+            "type": "integer",
+            "example": 123
+          },
+          "value": {
+            "type": "number",
+            "format": "float",
+            "example": 1000.50
+          },
+          "limitDate": {
             "type": "string",
-            "example": ""
+            "format": "date-time",
+            "example": "2025-12-31T23:59:59Z"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["Aberto", "Em_Andamento", "Expirado", "Concluido"],
+            "example": "Aberto"
+          },
+          "title": {
+            "type": "string",
+            "example": "Comprar carro"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "example": "Meta para comprar um carro novo até o final do ano."
           }
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": ""
-          },
-          "email": {
-            "type": "string",
-            "example": ""
-          },
-          "password": {
-            "type": "string",
-            "example": ""
-          }
-        }
+        },
+        "required": ["userId", "value", "limitDate", "status", "title"]
       }
     },
     "securitySchemes": {

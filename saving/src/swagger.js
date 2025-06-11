@@ -71,8 +71,8 @@ const doc = {
 };
 
 const outputFile = './config/swagger.json';
-const endpointsFiles = ['./interfaces/routes/savingRouter.js'];
+const endpointsFiles = ['./server.js'];
 
-swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
-  await import('./server.js');
+swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
+  import('./server.js');
 });

@@ -35,7 +35,9 @@ router.get('/:id', handler.findById);
     required: true,
     content: {
       "application/json": {
-        schema: { $ref: "#/components/schemas/PaymentMethod" }
+        schema: {
+          $ref: "#/components/schemas/PaymentMethod"
+        }
       }
     }
   }
@@ -56,7 +58,9 @@ router.post('/', validator(paymentMethodSchema), handler.create);
     required: true,
     content: {
       "application/json": {
-        schema: { $ref: "#/components/schemas/PaymentMethod" }
+        schema: {
+          $ref: "#/components/schemas/PaymentMethod"
+        }
       }
     }
   }

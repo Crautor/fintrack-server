@@ -10,7 +10,7 @@ generator client {
 
 model Saving {
   savingId          Int      @id @default(autoincrement())
-  userId            Int
+  userId            String
   value             Float
   financialGoalId   Int
   description       String?

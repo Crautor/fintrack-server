@@ -1,12 +1,18 @@
 import prisma from '../prismaClient.js';
 
 export default {
-  async findAll() {
-    return prisma.saving.findMany();
+  async findAll(userId) {
+    return prisma.saving.findMany({
+      where: { userId: userId },
+    });
   },
 
-  async findById(id) {
-    return prisma.saving.findUnique({ where: { savingId: Number(id) } });
+  async findById({ id, userId }) {
+    const where = {
+      savingId: Number(id),
+      userId: userId,
+    };
+    return prisma.saving.findFirst({ where });
   },
 
   async create(data) {

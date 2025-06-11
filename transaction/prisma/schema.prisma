@@ -10,7 +10,7 @@ generator client {
 
 model Transaction {
   transactionId     Int      @id @default(autoincrement())
-  userId            Int
+  userId            String
   value             Float
   categoryId        Int
   transactionDate   DateTime

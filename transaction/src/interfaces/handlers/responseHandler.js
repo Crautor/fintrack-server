@@ -18,6 +18,12 @@ export default (req, res, next) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json(err);
   };
 
+  res.bad_request = (err) => {
+    res.status(httpStatus.BAD_REQUEST).json({
+      message: err || 'Bad Request',
+    });
+  };
+
   res.forbidden = (err) => {
     res.status(httpStatus.FORBIDDEN).send(err);
   };

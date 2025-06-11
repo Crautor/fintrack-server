@@ -1,12 +1,18 @@
 import prisma from '../prismaClient.js';
 
 export default {
-  async findAll() {
-    return prisma.transaction.findMany();
+  async findAll(userId) {
+    return prisma.transaction.findMany({
+      where: { userId },
+    });
   },
 
-  async findById(id) {
-    return prisma.transaction.findUnique({ where: { transactionId: Number(id) } });
+  async findById({ id, userId }) {
+    const where = {
+      transactionId: Number(id),
+      userId: userId,
+    };
+    return prisma.transaction.findFirst({ where });
   },
 
   async create(data) {

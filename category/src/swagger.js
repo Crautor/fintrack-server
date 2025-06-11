@@ -44,8 +44,8 @@ const doc = {
             example: 'fa-car',
           },
           userId: {
-            type: "string",
-            example: "user@example.com"
+            type: 'string',
+            example: 'user@example.com',
           },
         },
       },

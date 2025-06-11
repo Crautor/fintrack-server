@@ -11,7 +11,7 @@ export default {
     const where = {
       transactionId: Number(id),
       userId: userId,
-    }
+    };
     return prisma.transaction.findFirst({ where });
   },
 

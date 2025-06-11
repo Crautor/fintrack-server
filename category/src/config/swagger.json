@@ -21,7 +21,17 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Cria uma nova categoria",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
         "responses": {
           "default": {
             "description": ""
@@ -49,7 +59,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Atualiza uma categoria existente",
         "parameters": [
           {
             "name": "id",
@@ -60,6 +70,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
         "responses": {
           "default": {
             "description": ""
@@ -88,35 +108,28 @@
   },
   "components": {
     "schemas": {
-      "InternalServerError": {
+      "Category": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string",
-            "example": ""
+          "categoryId": {
+            "type": "integer",
+            "example": 1,
+            "readOnly": true
           },
-          "message": {
-            "type": "string",
-            "example": ""
-          }
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
           "name": {
             "type": "string",
-            "example": ""
+            "example": "Transporte"
           },
-          "email": {
+          "icon": {
             "type": "string",
-            "example": ""
+            "example": "fa-car"
           },
-          "password": {
+          "userId": {
             "type": "string",
-            "example": ""
+            "example": "user@example.com"
           }
-        }
+        },
+        "required": ["name", "icon", "userId"]
       }
     },
     "securitySchemes": {

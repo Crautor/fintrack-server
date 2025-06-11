@@ -37,11 +37,15 @@ const doc = {
           },
           name: {
             type: 'string',
-            example: 'Alimentação',
+            example: 'Transporte',
           },
           icon: {
             type: 'string',
-            example: '🍔',
+            example: 'fa-car',
+          },
+          userId: {
+            type: 'string',
+            example: 'user@example.com',
           },
         },
       },
@@ -56,7 +60,7 @@ const doc = {
 };
 
 const outputFile = './config/swagger.json';
-const endpointsFiles = ['./interfaces/routes/categoryRouter.js'];
+const endpointsFiles = ['./server.js'];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
   await import('./server.js');

@@ -28,45 +28,45 @@ const doc = {
           password: { type: 'string' },
         },
       },
-    },
-    Transaction: {
-      type: 'object',
-      properties: {
-        transactionId: {
-          type: 'integer',
-          example: 1,
-        },
-        userId: {
-          type: 'integer',
-          example: 42,
-        },
-        value: {
-          type: 'number',
-          format: 'float',
-          example: 150.75,
-        },
-        categoryId: {
-          type: 'integer',
-          example: 5,
-        },
-        transactionDate: {
-          type: 'string',
-          format: 'date-time',
-          example: '2025-06-10T14:30:00Z',
-        },
-        description: {
-          type: 'string',
-          example: 'Compra supermercado',
-          nullable: true,
-        },
-        recurrence: {
-          type: 'boolean',
-          example: false,
-        },
-        type: {
-          type: 'string',
-          enum: ['Income', 'Expense'],
-          example: 'Expense',
+      Transaction: {
+        type: 'object',
+        properties: {
+          transactionId: {
+            type: 'integer',
+            example: 1,
+          },
+          userId: {
+            type: 'integer',
+            example: 42,
+          },
+          value: {
+            type: 'number',
+            format: 'float',
+            example: 150.75,
+          },
+          categoryId: {
+            type: 'integer',
+            example: 5,
+          },
+          transactionDate: {
+            type: 'string',
+            format: 'date-time',
+            example: '2025-06-10T14:30:00Z',
+          },
+          description: {
+            type: 'string',
+            example: 'Compra supermercado',
+            nullable: true,
+          },
+          recurrence: {
+            type: 'boolean',
+            example: false,
+          },
+          type: {
+            type: 'string',
+            enum: ['Income', 'Expense'],
+            example: 'Expense',
+          },
         },
       },
     },
@@ -80,7 +80,7 @@ const doc = {
 };
 
 const outputFile = './config/swagger.json';
-const endpointsFiles = ['./interfaces/routes/transactionRouter.js'];
+const endpointsFiles = ['./server.js'];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
   await import('./server.js');

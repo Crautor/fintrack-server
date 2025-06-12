@@ -91,3 +91,37 @@ export const remove = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getByCategory = async (req, res, next) => {
+  try {
+    const { email, categoryId } = req.query;
+    if (!email || !categoryId) {
+      return res.bad_request('Email e categoryId são obrigatórios');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const data = await TransactionService.findByCategory(usuario.id, categoryId);
+    res.hateoas_list(data, 1);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getByTransactionDate = async (req, res, next) => {
+  try {
+    const { email, transactionDate } = req.query;
+    if (!email || !transactionDate) {
+      return res.bad_request('Email e transactionDate são obrigatórios');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const data = await TransactionService.findByTransactionDate(usuario.id, transactionDate);
+    res.hateoas_list(data, 1);
+  } catch (err) {
+    next(err);
+  }
+};

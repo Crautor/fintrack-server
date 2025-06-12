@@ -74,4 +74,42 @@ router.put('/:id', validator(transactionSchema), handler.update);
 */
 router.delete('/:id', handler.remove);
 
+/* 
+  #swagger.tags = ['Transaction']
+  #swagger.description = 'Retorna todas as transações de uma categoria'
+  #swagger.parameters['categoryId'] = {
+    in: 'query',
+    description: 'ID da categoria',
+    required: true,
+    type: 'integer'
+  }
+  #swagger.parameters['email'] = {
+    in: 'query',
+    description: 'E-mail do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.security = [{ "bearerAuth": [] }]
+*/
+router.get('/find/category/', handler.getByCategory);
+
+/* 
+  #swagger.tags = ['Transaction']
+  #swagger.description = 'Retorna todas as transações de uma data específica'
+  #swagger.parameters['transactionDate'] = {
+    in: 'query',
+    description: 'Data da transação (YYYY-MM-DD)',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['email'] = {
+    in: 'query',
+    description: 'E-mail do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.security = [{ "bearerAuth": [] }]
+*/
+router.get('/find/date', handler.getByTransactionDate);
+
 export default router;

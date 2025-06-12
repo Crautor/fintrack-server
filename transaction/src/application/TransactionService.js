@@ -6,4 +6,6 @@ export default {
   create: TransactionRepository.create,
   update: TransactionRepository.update,
   remove: TransactionRepository.remove,
+  findByCategory: TransactionRepository.findByCategory,
+  findByTransactionDate: TransactionRepository.findByTransactionDate,
 };

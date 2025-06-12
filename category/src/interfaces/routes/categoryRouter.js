@@ -65,7 +65,7 @@ router.post('/', validator(categorySchema), handler.create);
     }
   }
 */
-router.put('/:id', validator(categorySchema), handler.update);
+router.put('/:id', handler.update);
 
 /* 
   #swagger.tags = ['Category']

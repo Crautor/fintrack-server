@@ -1,5 +1,4 @@
 services:
-
   email-listener:
     build: ./email-listener
     container_name: email-listener
@@ -13,7 +12,7 @@ services:
       - ./envs/emailListener.env
     networks:
       - email-listener-network
-  
+
   mysql-category:
     image: mysql:8.0
     container_name: mysql-category

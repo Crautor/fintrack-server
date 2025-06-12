@@ -2,10 +2,8 @@ import { Router } from 'express';
 import * as handler from '../handlers/paymentMethodHandler.js';
 import validator from '../../middlewares/validator.js';
 import paymentMethodSchema from '../validators/paymentMethodValidator.js';
-import verifyJWT from '../../middlewares/verifyJWT.js';
 
 const router = Router();
-router.use(verifyJWT);
 
 /* 
   #swagger.tags = ['PaymentMethod']

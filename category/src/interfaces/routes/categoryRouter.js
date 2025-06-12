@@ -2,10 +2,8 @@ import { Router } from 'express';
 import * as handler from '../handlers/CategoryHandler.js';
 import validator from '../../middlewares/validator.js';
 import categorySchema from '../validators/categoryValidator.js';
-import verifyJWT from '../../middlewares/verifyJWT.js';
 
 const router = Router();
-router.use(verifyJWT);
 
 /* 
   #swagger.tags = ['Category']

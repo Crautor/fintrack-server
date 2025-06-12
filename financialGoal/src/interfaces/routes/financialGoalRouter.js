@@ -2,10 +2,8 @@ import { Router } from 'express';
 import * as handler from '../handlers/financialGoalHandler.js';
 import validator from '../../middlewares/validator.js';
 import financialGoalSchema from '../validators/financialGoalValidator.js';
-import verifyJWT from '../../middlewares/verifyJWT.js';
 
 const router = Router();
-router.use(verifyJWT);
 
 /* 
   #swagger.tags = ['FinancialGoal']

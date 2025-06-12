@@ -6,7 +6,6 @@ const helmet = require('helmet');
 
 const rotasAutenticacao = require('./presentation/routes/auth.routes');
 const { syncDatabase } = require('./infrastructure/config/database.config');
-const servicoEmail = require('./infrastructure/services/email.service');
 const servicoEventos = require('./infrastructure/services/event.service');
 const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
@@ -40,7 +39,6 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const iniciarServidor = async () => {
   try {
     await syncDatabase();
-    await servicoEmail.iniciar();
 
     console.log('[Sistema] Eventos de domínio disponíveis:');
     Object.values(servicoEventos.filas || {}).forEach((ev) => console.log(`- ${ev}`));

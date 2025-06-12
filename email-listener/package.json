@@ -1,0 +1,19 @@
+{
+  "name": "servico-autenticacao",
+  "version": "1.0.0",
+  "description": "Microserviço para autenticação com JWT, RabbitMQ, recuperação de senha e estrutura em camadas.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "nodemailer": "^6.9.7",
+    "pg": "^8.11.3",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

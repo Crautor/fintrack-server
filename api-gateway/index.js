@@ -2,6 +2,8 @@ import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import verifyJWT from './middlewares/verifyJWT.js';
+import responseHandler from './interfaces/handlers/responseHandler.js';
 
 dotenv.config();
 
@@ -30,9 +32,11 @@ const services = {
 };
 
 app.use(cors());
+app.use(responseHandler);
 
 app.use(
   '/api/category',
+  verifyJWT,
   createProxyMiddleware({
     target: services.category.target,
     changeOrigin: true,
@@ -40,6 +44,7 @@ app.use(
 );
 app.use(
   '/api/savings',
+  verifyJWT,
   createProxyMiddleware({
     target: services.saving.target,
     changeOrigin: true,
@@ -48,6 +53,7 @@ app.use(
 
 app.use(
   '/api/transactions',
+  verifyJWT,
   createProxyMiddleware({
     target: services.transaction.target,
     changeOrigin: true,
@@ -56,6 +62,7 @@ app.use(
 
 app.use(
   '/api/financialGoals',
+  verifyJWT,
   createProxyMiddleware({
     target: services.financialGoal.target,
     changeOrigin: true,
@@ -64,6 +71,7 @@ app.use(
 
 app.use(
   '/api/paymentMethods',
+  verifyJWT,
   createProxyMiddleware({
     target: services.paymentMethod.target,
     changeOrigin: true,

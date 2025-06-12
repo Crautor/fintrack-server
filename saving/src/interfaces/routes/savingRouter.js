@@ -2,11 +2,8 @@ import { Router } from 'express';
 import * as handler from '../handlers/savingHandler.js';
 import validator from '../../middlewares/validator.js';
 import savingSchema from '../validators/savingValidator.js';
-import verifyJWT from '../../middlewares/verifyJWT.js';
 
 const router = Router();
-router.use(verifyJWT);
-
 /* 
   #swagger.tags = ['Saving']
   #swagger.description = 'Retorna todas as poupanças'

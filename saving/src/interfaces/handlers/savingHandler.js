@@ -89,3 +89,24 @@ export const remove = async (req, res, next) => {
     next(err);
   }
 };
+
+export const findByFinancialGoal = async (req, res, next) => {
+  try {
+    const { email, financialGoalId } = req.query;
+    if (!email) {
+      return res.bad_request('Email is required');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const item = await SavingService.findByFinancialGoal({
+      userId: usuario.id,
+      financialGoalId: financialGoalId,
+    });
+    if (!item) return res.not_found();
+    res.hateoas_item(item);
+  } catch (err) {
+    next(err);
+  }
+};

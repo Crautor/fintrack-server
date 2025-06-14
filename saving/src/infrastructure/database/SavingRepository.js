@@ -29,4 +29,15 @@ export default {
   async remove(id) {
     return prisma.saving.delete({ where: { savingId: Number(id) } });
   },
+
+  async findByFinancialGoal({ userId, financialGoalId }) {
+    console.log(financialGoalId);
+    const where = {
+      financialGoalId: Number(financialGoalId),
+      userId,
+    };
+    return prisma.saving.findMany({
+      where,
+    });
+  },
 };

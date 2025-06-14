@@ -77,4 +77,6 @@ router.put('/:id', validator(savingSchema), handler.update);
 */
 router.delete('/:id', handler.remove);
 
+router.get('/find/goal', handler.findByFinancialGoal);
+
 export default router;

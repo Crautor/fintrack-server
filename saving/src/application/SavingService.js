@@ -6,4 +6,5 @@ export default {
   create: SavingRepository.create,
   update: SavingRepository.update,
   remove: SavingRepository.remove,
+  findByFinancialGoal: SavingRepository.findByFinancialGoal,
 };

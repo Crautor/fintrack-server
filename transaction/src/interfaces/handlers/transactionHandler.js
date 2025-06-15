@@ -125,3 +125,20 @@ export const getByTransactionDate = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getByPeriod = async (req, res, next) => {
+  try {
+    const { email, startDate, endDate } = req.query;
+    if (!email || !startDate || !endDate) {
+      return res.bad_request('Email, startDate e endDate são obrigatórios');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const data = await TransactionService.findByPeriod(usuario.id, startDate, endDate);
+    res.hateoas_list(data, 1);
+  } catch (err) {
+    next(err);
+  }
+};

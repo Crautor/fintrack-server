@@ -112,4 +112,29 @@ router.get('/find/category/', handler.getByCategory);
 */
 router.get('/find/date', handler.getByTransactionDate);
 
+/*
+  #swagger.tags = ['Transaction']
+  #swagger.description = 'Retorna todas as transações em um período específico'
+  #swagger.parameters['startDate'] = {
+    in: 'query',
+    description: 'Data de início do período (YYYY-MM-DD)',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['endDate'] = {
+    in: 'query',
+    description: 'Data de fim do período (YYYY-MM-DD)',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['email'] = {
+    in: 'query',
+    description: 'E-mail do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.security = [{ "bearerAuth": [] }]
+*/
+router.get('/find/period', handler.getByPeriod);
+
 export default router;

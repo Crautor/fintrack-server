@@ -8,4 +8,5 @@ export default {
   remove: TransactionRepository.remove,
   findByCategory: TransactionRepository.findByCategory,
   findByTransactionDate: TransactionRepository.findByTransactionDate,
+  findByPeriod: TransactionRepository.findByPeriod,
 };

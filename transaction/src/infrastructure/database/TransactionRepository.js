@@ -72,6 +72,24 @@ export default {
       orderBy: {
         transactionDate: 'desc',
       },
+      include: { category: true },
+    });
+  },
+
+  async findByPeriod(userId, startDate, endDate) {
+    // Converte para Date e configura o inicio e fim do período
+    const start = new Date(startDate);
+    start.setHours(0, 0, 0, 0);
+    
+    const end = new Date(endDate);
+    end.setHours(23, 59, 59, 999);
+
+    return prisma.transaction.findMany({ 
+      where: { 
+        userId,
+        transactionDate: { gte: start, lte: end },
+      },
+      orderBy: { transactionDate: 'desc' },
     });
   },
 };

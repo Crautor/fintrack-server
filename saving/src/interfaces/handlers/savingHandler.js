@@ -13,7 +13,7 @@ async function buscarUsuario(email) {
 
 export const create = async (req, res, next) => {
   try {
-    const { email, value, financialGoalId, title, description } = req.body;
+    const { email, value, financialGoalId, title, description, createdAt } = req.body;
     if (!email) {
       return res.bad_request('Email is required');
     }
@@ -27,6 +27,7 @@ export const create = async (req, res, next) => {
       financialGoalId,
       description,
       title,
+      createdAt,
     };
     const response = await SavingService.create(data);
     res.created(response);
@@ -103,6 +104,27 @@ export const findByFinancialGoal = async (req, res, next) => {
     const item = await SavingService.findByFinancialGoal({
       userId: usuario.id,
       financialGoalId: financialGoalId,
+    });
+    if (!item) return res.not_found();
+    res.hateoas_item(item);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const findByCreatedAt = async (req, res, next) => {
+  try {
+    const { email, createdAt } = req.query;
+    if (!email) {
+      return res.bad_request('Email is required');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const item = await SavingService.findByCreatedAt({
+      userId: usuario.id,
+      createdAt: new Date(createdAt),
     });
     if (!item) return res.not_found();
     res.hateoas_item(item);

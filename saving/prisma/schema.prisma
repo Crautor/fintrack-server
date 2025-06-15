@@ -9,10 +9,11 @@ generator client {
 }
 
 model Saving {
-  savingId          Int      @id @default(autoincrement())
+  savingId          Int         @id @default(autoincrement())
   userId            String
   value             Float
   financialGoalId   Int
   description       String?
   title             String?
+  createdAt         DateTime    @default(now())
 }

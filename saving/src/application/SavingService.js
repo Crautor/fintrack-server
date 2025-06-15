@@ -7,4 +7,5 @@ export default {
   update: SavingRepository.update,
   remove: SavingRepository.remove,
   findByFinancialGoal: SavingRepository.findByFinancialGoal,
+  findByCreatedAt: SavingRepository.findByCreatedAt,
 };

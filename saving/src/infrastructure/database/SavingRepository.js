@@ -4,6 +4,7 @@ export default {
   async findAll(userId) {
     return prisma.saving.findMany({
       where: { userId: userId },
+      orderBy: { createdAt: 'desc' },
     });
   },
 
@@ -38,6 +39,24 @@ export default {
     };
     return prisma.saving.findMany({
       where,
+      orderBy: { createdAt: 'desc' },
+    });
+  },
+
+  async findByCreatedAt({ userId, createdAt }) {
+    const start = new Date(createdAt);
+    const end = new Date(createdAt);
+    end.setHours(23, 59, 59, 999); // Define o final do dia
+
+    return prisma.saving.findMany({
+      where: {
+        userId,
+        createdAt: {
+          gte: start,
+          lte: end,
+        },
+      },
+      orderBy: { createdAt: 'desc' },
     });
   },
 };

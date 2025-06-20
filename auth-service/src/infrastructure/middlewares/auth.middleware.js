@@ -3,7 +3,15 @@ const jwt = require('jsonwebtoken');
 class AutenticacaoMiddleware {
   static async verificarToken(req, res, next) {
     try {
-      const token = req.cookies['auth_token'];
+      let token = null;
+      // Primeiro tenta pegar do header Authorization
+      const authHeader = req.headers['authorization'] || req.headers['Authorization'];
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.split(' ')[1];
+      } else if (req.cookies && req.cookies['auth_token']) {
+        // Fallback para cookie
+        token = req.cookies['auth_token'];
+      }
 
       if (!token) {
         return res.status(401).json({ erro: 'Token ausente' });

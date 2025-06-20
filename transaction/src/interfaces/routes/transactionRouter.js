@@ -137,4 +137,36 @@ router.get('/find/date', handler.getByTransactionDate);
 */
 router.get('/find/period', handler.getByPeriod);
 
+/* 
+  #swagger.tags = ['Transaction']
+  #swagger.description = 'Retorna o total de income e expense das transações de uma categoria'
+  #swagger.security = [{ "bearerAuth": [] }]
+  #swagger.parameters['email'] = {
+    in: 'query',
+    description: 'Email do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['categoryId'] = {
+    in: 'query',
+    description: 'ID da categoria',
+    required: true,
+    type: 'string'
+  }
+*/
+router.get('/total/category', handler.getTotalByCategory);
+
+/* 
+  #swagger.tags = ['Transaction']
+  #swagger.description = 'Retorna o total de income e expense de todas as transações do usuário'
+  #swagger.security = [{ "bearerAuth": [] }]
+  #swagger.parameters['email'] = {
+    in: 'query',
+    description: 'Email do usuário',
+    required: true,
+    type: 'string'
+  }
+*/
+router.get('/total/user', handler.getTotalByUser);
+
 export default router;

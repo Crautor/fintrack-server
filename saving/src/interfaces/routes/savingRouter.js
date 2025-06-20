@@ -79,4 +79,23 @@ router.delete('/:id', handler.remove);
 
 router.get('/find/goal', handler.findByFinancialGoal);
 
+/* 
+  #swagger.tags = ['Saving']
+  #swagger.description = 'Retorna o total de value das poupanças de um usuário para uma meta financeira'
+  #swagger.security = [{ "bearerAuth": [] }]
+  #swagger.parameters['email'] = {
+    in: 'query',
+    description: 'Email do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['financialGoalId'] = {
+    in: 'query',
+    description: 'ID da meta financeira',
+    required: true,
+    type: 'string'
+  }
+*/
+router.get('/total/goal', handler.getTotalSavingByFinancialGoal);
+
 export default router;

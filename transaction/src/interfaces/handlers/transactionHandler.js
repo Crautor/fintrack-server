@@ -142,3 +142,53 @@ export const getByPeriod = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getTotalByCategory = async (req, res, next) => {
+  try {
+    const { email, categoryId } = req.query;
+    if (!email || !categoryId) {
+      return res.bad_request('Email e categoryId são obrigatórios');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const transactions = await TransactionService.findByCategory(usuario.id, categoryId);
+    let totalIncome = 0;
+    let totalExpense = 0;
+    if (Array.isArray(transactions)) {
+      transactions.forEach((t) => {
+        if (t.type === 'Income') totalIncome += Number(t.value) || 0;
+        if (t.type === 'Expense') totalExpense += Number(t.value) || 0;
+      });
+    }
+    res.json({ totalIncome, totalExpense });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getTotalByUser = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    if (!email) {
+      return res.bad_request('Email é obrigatório');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    const transactions = await TransactionService.findAll(usuario.id);
+    let totalIncome = 0;
+    let totalExpense = 0;
+    if (Array.isArray(transactions)) {
+      transactions.forEach((t) => {
+        if (t.type === 'Income') totalIncome += Number(t.value) || 0;
+        if (t.type === 'Expense') totalExpense += Number(t.value) || 0;
+      });
+    }
+    res.json({ totalIncome, totalExpense });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -88,6 +88,24 @@ class ControladorAutenticacao {
       res.status(500).json({ erro: erro.message });
     }
   }
+
+  // Atualiza informações de um usuário
+  async atualizarUsuario(req, res) {
+    try {
+      const { email } = req.params;
+      const changes = req.body;
+      // Busca o usuário pelo email
+      const usuario = await servicoAuth.getByEmail(email);
+      if (!usuario) {
+        return res.status(404).json({ erro: 'Usuário não encontrado' });
+      }
+      // Atualiza usando o id do usuário encontrado
+      const usuarioAtualizado = await servicoAuth.updateUser(usuario.id, changes);
+      res.json(usuarioAtualizado);
+    } catch (erro) {
+      res.status(400).json({ erro: erro.message });
+    }
+  }
 }
 
 module.exports = new ControladorAutenticacao();

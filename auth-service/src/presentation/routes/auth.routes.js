@@ -119,7 +119,7 @@ rotas.get('/usuario/:email', controlador.buscarPorEmail);
   #swagger.description = 'Retorna todos os usuários'
   #swagger.security = [{ "bearerAuth": [] }]
 */
-rotas.get('/usuario', MiddlewareAutenticacao.verificarToken, controlador.buscarTodosUsuarios);
+rotas.get('/usuario', controlador.buscarTodosUsuarios);
 
 /* 
   #swagger.tags = ['Auth']
@@ -148,5 +148,26 @@ rotas.post('/usuario/validar', controlador.validarCodigo);
   #swagger.security = [{ "bearerAuth": [] }]
 */
 rotas.post('/logout', MiddlewareAutenticacao.verificarToken, controlador.sair);
+
+/* 
+  #swagger.tags = ['Auth']
+  #swagger.description = 'Atualiza informações de um usuário'
+  #swagger.security = [{ "bearerAuth": [] }]
+  #swagger.parameters['id'] = {
+    in: 'path',
+    description: 'ID do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.requestBody = {
+    required: true,
+    content: {
+      "application/json": {
+        schema: { $ref: "#/components/schemas/User" }
+      }
+    }
+  }
+*/
+rotas.put('/usuario/:email', controlador.atualizarUsuario);
 
 module.exports = rotas;

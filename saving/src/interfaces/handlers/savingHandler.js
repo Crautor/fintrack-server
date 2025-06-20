@@ -132,3 +132,29 @@ export const findByCreatedAt = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getTotalSavingByFinancialGoal = async (req, res, next) => {
+  try {
+    const { email, financialGoalId } = req.query;
+    if (!email) {
+      return res.bad_request('Email is required');
+    }
+    if (!financialGoalId) {
+      return res.bad_request('financialGoalId is required');
+    }
+    const usuario = await buscarUsuario(email);
+    if (!usuario) {
+      return res.not_found('Usuário não encontrado');
+    }
+    // Busca todas as economias para a meta
+    const savings = await SavingService.findByFinancialGoal({
+      userId: usuario.id,
+      financialGoalId: financialGoalId,
+    });
+    // Soma o value de todas as economias
+    const total = Array.isArray(savings) ? savings.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0) : 0;
+    res.json({ total });
+  } catch (err) {
+    next(err);
+  }
+};

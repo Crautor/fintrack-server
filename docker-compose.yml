@@ -1,4 +1,23 @@
 services:
+  notification:
+    build: ./notification
+    container_name: notification
+    restart: always
+    ports:
+      - '3007:3007'
+    volumes:
+      - ./notification:/app
+      - /app/node_modules
+      - ./envs/firebase-service-account.json:/app/firebase-service-account.json
+    env_file:
+      - ./envs/notification.env
+    networks:
+      - api-gateway-network
+      - notification-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
   email-listener:
     build: ./email-listener
     container_name: email-listener
@@ -257,6 +276,7 @@ services:
       - auth-network
       - email-listener-network
       - api-gateway-network
+      - notification-network
     mem_limit: 256m
     cpus: 0.5
     healthcheck:
@@ -281,6 +301,8 @@ networks:
   paymentmethod-network:
     driver: bridge
   auth-network:
+    driver: bridge
+  notification-network:
     driver: bridge
 
 volumes:

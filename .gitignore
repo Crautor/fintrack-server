@@ -136,3 +136,4 @@ dist
 .pnp.*
 
 /*/*.env
+envs/firebase-service-account.json

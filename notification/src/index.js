@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const dotenv = require('dotenv');   // <- Adicionado dotenv
+const dotenv = require('dotenv'); // <- Adicionado dotenv
 
-dotenv.config();                    // <- Carrega as variáveis do .env
+dotenv.config(); // <- Carrega as variáveis do .env
 
 const app = express();
 

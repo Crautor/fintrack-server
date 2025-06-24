@@ -1,4 +1,3 @@
-
 const tokenRepository = require('../repositories/tokenRepository');
 
 async function registerToken(req, res, next) {

@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 
@@ -21,7 +20,7 @@ async function saveToken(userId, token) {
   const tokens = loadTokens();
 
   // Remove tokens antigos para o mesmo userId
-  const filteredTokens = tokens.filter(t => t.userId !== userId);
+  const filteredTokens = tokens.filter((t) => t.userId !== userId);
 
   filteredTokens.push({
     userId,
@@ -34,7 +33,7 @@ async function saveToken(userId, token) {
 
 async function getTokenByUserId(userId) {
   const tokens = loadTokens();
-  const userToken = tokens.find(t => t.userId === userId);
+  const userToken = tokens.find((t) => t.userId === userId);
   return userToken ? userToken.token : null;
 }
 

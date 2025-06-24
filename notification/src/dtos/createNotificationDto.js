@@ -15,7 +15,7 @@ function validateCreateNotificationDto(data) {
     scheduledFor: data.scheduledFor || null,
     sendEmail: !!data.sendEmail,
     sendPush: !!data.sendPush,
-    pushToken: data.pushToken || null
+    pushToken: data.pushToken || null,
   };
 }
 

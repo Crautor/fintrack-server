@@ -11,7 +11,7 @@ async function addNotification(notificationData) {
     scheduledFor: notificationData.scheduledFor
       ? admin.firestore.Timestamp.fromDate(new Date(notificationData.scheduledFor))
       : null,
-    read: false // notificação começa como não lida
+    read: false, // notificação começa como não lida
   });
   return docRef;
 }
@@ -26,7 +26,7 @@ async function getNotificationsByUser(userId) {
     .orderBy('createdAt', 'desc')
     .get();
 
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
 
 /**
@@ -39,5 +39,5 @@ async function markNotificationAsRead(notificationId) {
 module.exports = {
   addNotification,
   getNotificationsByUser,
-  markNotificationAsRead
+  markNotificationAsRead,
 };

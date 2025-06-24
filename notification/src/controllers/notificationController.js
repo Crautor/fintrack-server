@@ -32,5 +32,5 @@ async function markNotificationAsRead(req, res, next) {
 module.exports = {
   createNotification,
   getNotificationsByUser,
-  markNotificationAsRead
+  markNotificationAsRead,
 };

@@ -29,6 +29,9 @@ const services = {
   category: {
     target: 'http://category:3006/api/category',
   },
+  notification: {
+    target: 'http://notification:3007/api/notifications',
+  },
 };
 
 app.use(cors());
@@ -82,6 +85,14 @@ app.use(
   '/api/auth',
   createProxyMiddleware({
     target: services.auth.target,
+    changeOrigin: true,
+  }),
+);
+
+app.use(
+  '/api/notifications',
+  createProxyMiddleware({
+    target: services.notification.target,
     changeOrigin: true,
   }),
 );

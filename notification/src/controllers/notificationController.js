@@ -14,7 +14,7 @@ async function buscarUsuario(email) {
 
 async function createNotification(req, res, next) {
   try {
-    const { email } = req.params;
+    const { email } = req.query;
     if (!email) {
       return res.status(400).json({ message: 'Email is required.' });
     }
@@ -34,7 +34,7 @@ async function createNotification(req, res, next) {
 
 async function getNotificationsByUser(req, res, next) {
   try {
-    const { email } = req.params;
+    const { email } = req.query;
     if (!email) {
       return res.status(400).json({ message: 'Email is required.' });
     }

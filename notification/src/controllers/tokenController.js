@@ -13,7 +13,7 @@ async function buscarUsuario(email) {
 
 async function registerToken(req, res, next) {
   try {
-    const { email } = req.params;
+    const { email } = req.query;
     const user = await buscarUsuario(email);
     if (!user) {
       return res.status(404).json({ message: 'Usuário não encontrado.' });
